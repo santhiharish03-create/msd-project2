@@ -1,0 +1,5 @@
+{
+  "buildCommand": "cd timetable && npm install && npm run build",
+  "outputDirectory": "timetable/build",
+  "installCommand": "npm install && cd timetable && npm install"
+}
