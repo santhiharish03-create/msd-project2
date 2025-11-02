@@ -7,11 +7,12 @@
     "start": "node start.js",
     "frontend": "cd timetable && npm run dev",
     "backend": "cd backend && npm run dev",
-    "build": "cd timetable && npm install && npm run build"
+    "build": "cp -r timetable/src ./src && cp -r timetable/public ./public && cp timetable/package.json ./frontend-package.json && react-scripts build"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.1.7"
+    "tailwindcss": "^4.1.7",
+    "react-scripts": "5.0.1"
   }
 }
