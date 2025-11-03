@@ -31,3 +31,4 @@ Full-stack timetable management system with React frontend and Node.js backend.
 - **Frontend only**: `npm run frontend`
 - **Backend only**: `npm run backend`
 - **Build**: `npm run build`# msd-project
+# MSDproject
