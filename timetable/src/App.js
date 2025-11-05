@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { FaHome, FaCalendarAlt, FaUserTie, FaDoorOpen, FaGraduationCap, FaSun, FaMoon, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaCalendarAlt, FaUserTie, FaDoorOpen, FaGraduationCap, FaUpload, FaSun, FaMoon, FaSignOutAlt } from 'react-icons/fa';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Toaster } from 'react-hot-toast';
 import Login from './components/Login';
@@ -10,6 +10,7 @@ import TimeTable from './components/TimeTable';
 import Faculty from './components/pages/Faculty';
 import Rooms from './components/pages/Rooms';
 import ClassView from './components/pages/ClassView';
+import UploadExcel from './components/UploadExcel';
 import Footer from './components/Footer';
 import vignanLogo from './assets/vignan-logo.png';
 import './App.css';
@@ -35,6 +36,7 @@ const AnimatedRoutes = () => {
             <Route path="/class" element={<ClassView />} />
             <Route path="/faculty" element={<Faculty />} />
             <Route path="/rooms" element={<Rooms />} />
+            <Route path="/upload" element={<UploadExcel />} />
           </Routes>
         </div>
       </CSSTransition>
@@ -97,6 +99,9 @@ const App = () => {
             </Link>
             <Link to="/rooms" className="nav-link">
               <FaDoorOpen /> Rooms
+            </Link>
+            <Link to="/upload" className="nav-link">
+              <FaUpload /> Upload
             </Link>
             <button 
               className="dark-mode-toggle" 

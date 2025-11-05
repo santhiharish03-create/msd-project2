@@ -20,11 +20,19 @@ class ApiService {
     }
 
     try {
+      console.log('Making API request to:', url);
       const response = await fetch(url, config);
+      console.log('Response status:', response.status);
+      
       if (!response.ok) {
+        const errorText = await response.text();
+        console.error('API error response:', errorText);
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      return await response.json();
+      
+      const result = await response.json();
+      console.log('API response:', result);
+      return result;
     } catch (error) {
       console.error('API request failed:', error);
       throw error;
