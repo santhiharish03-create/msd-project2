@@ -4,6 +4,7 @@ import { FaHome, FaCalendarAlt, FaUserTie, FaDoorOpen, FaGraduationCap, FaSun, F
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Toaster } from 'react-hot-toast';
 import Login from './components/Login';
+import Signup from './components/Signup';
 import Home from './components/pages/Home';
 import TimeTable from './components/TimeTable';
 import Faculty from './components/pages/Faculty';
@@ -44,6 +45,7 @@ const AnimatedRoutes = () => {
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -55,7 +57,20 @@ const App = () => {
   };
 
   if (!isLoggedIn) {
-    return <Login onLogin={setIsLoggedIn} />;
+    if (showSignup) {
+      return (
+        <Signup 
+          onSignup={setIsLoggedIn} 
+          onSwitchToLogin={() => setShowSignup(false)} 
+        />
+      );
+    }
+    return (
+      <Login 
+        onLogin={setIsLoggedIn} 
+        onSwitchToSignup={() => setShowSignup(true)} 
+      />
+    );
   }
 
   return (

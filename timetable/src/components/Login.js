@@ -3,14 +3,25 @@ import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import vignanLogo from '../assets/vignan-logo.png';
 import './Login.css';
 
-const Login = ({ onLogin }) => {
+const Login = ({ onLogin, onSwitchToSignup }) => {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Check admin credentials
     if (credentials.username === 'admin' && credentials.password === 'admin123') {
+      onLogin(true);
+      return;
+    }
+    
+    // Check user accounts from localStorage
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    const user = users.find(u => u.username === credentials.username && u.password === credentials.password);
+    
+    if (user) {
       onLogin(true);
     } else {
       setError('Invalid credentials');
@@ -64,6 +75,14 @@ const Login = ({ onLogin }) => {
             <p>Demo Credentials:</p>
             <p>Username: <strong>admin</strong></p>
             <p>Password: <strong>admin123</strong></p>
+          </div>
+          
+          <div className="switch-form">
+            <p>Don't have an account? 
+              <button type="button" onClick={onSwitchToSignup} className="link-btn">
+                Sign up here
+              </button>
+            </p>
           </div>
         </form>
       </div>
