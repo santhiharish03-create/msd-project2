@@ -132,9 +132,12 @@ const Rooms = () => {
           <div key={room.id} className={`room-card ${room.status}`}>
             <div className="room-header">
               <h3><FaDoorOpen /> Room {room.id}</h3>
-              <span className={`status-badge ${room.status}`}>
-                {room.status.charAt(0).toUpperCase() + room.status.slice(1)}
-              </span>
+              <span className={`status-badge ${room?.status || 'unknown'}`}>
+  {room?.status
+    ? room.status.charAt(0).toUpperCase() + room.status.slice(1)
+    : 'Unknown'}
+</span>
+
             </div>
 
             <div className="room-info">

@@ -9,9 +9,9 @@ const Footer = () => {
         <div className="footer-section">
           <h3>Development Team</h3>
           <ul className="team-list">
-            <li>Kranthi Kiran</li>
-            <li>Sadwik</li>
-            <li>Kartheek</li>
+            <li>Pokuri Ganesh</li>
+            <li>Raghuram</li>
+            <li>kusuma</li>
           </ul>
         </div>
         <div className="footer-section">

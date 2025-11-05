@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import { FaHome, FaCalendarAlt, FaUserTie, FaDoorOpen, FaGraduationCap, FaSun, FaMoon } from 'react-icons/fa';
+import { FaHome, FaCalendarAlt, FaUserTie, FaDoorOpen, FaGraduationCap, FaSun, FaMoon, FaSignOutAlt } from 'react-icons/fa';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Toaster } from 'react-hot-toast';
+import Login from './components/Login';
 import Home from './components/pages/Home';
 import TimeTable from './components/TimeTable';
 import Faculty from './components/pages/Faculty';
@@ -42,11 +43,20 @@ const AnimatedRoutes = () => {
 
 const App = () => {
   const [darkMode, setDarkMode] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle('dark-mode');
   };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
+  if (!isLoggedIn) {
+    return <Login onLogin={setIsLoggedIn} />;
+  }
 
   return (
     <Router>
@@ -79,6 +89,13 @@ const App = () => {
               aria-label="Toggle dark mode"
             >
               {darkMode ? <FaSun /> : <FaMoon />}
+            </button>
+            <button 
+              className="logout-btn" 
+              onClick={handleLogout}
+              aria-label="Logout"
+            >
+              <FaSignOutAlt /> Logout
             </button>
           </div>
         </nav>
