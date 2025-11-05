@@ -1,4 +1,6 @@
 const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
 const cors = require('cors');
 require('dotenv').config();
 const connectDB = require('./config/database');
@@ -16,7 +18,16 @@ connectDB().then(() => {
 });
 
 const app = express();
+const server = http.createServer(app);
+const io = socketIo(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"]
+  }
+});
 const PORT = process.env.PORT || 5001;
+
+app.set('io', io);
 
 app.use(cors({
   origin: ['http://localhost:3000', 'http://localhost:3001'],
@@ -41,6 +52,15 @@ app.get('/api/health', (req, res) => {
 
 app.use(errorHandler);
 
-app.listen(PORT, () => {
+// Real-time connections
+io.on('connection', (socket) => {
+  console.log('Client connected:', socket.id);
+  
+  socket.on('disconnect', () => {
+    console.log('Client disconnected:', socket.id);
+  });
+});
+
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

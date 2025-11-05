@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaSearch, FaClock, FaBell, FaCalendarAlt, FaChalkboardTeacher, FaDoorOpen, FaBullhorn, FaUniversity, FaUsers, FaCloudDownloadAlt, FaShieldAlt, FaChartLine, FaWifi } from 'react-icons/fa';
 import { getAllTimetables, getAllRooms, getCurrentClass } from '../../services/timetableService';
 import socketService from '../../services/socketService';
+import RealTimeStatus from '../RealTimeStatus';
 import campusImage from '../../assets/vignan-logo.png';
 import './Home.css';
 
@@ -80,6 +81,7 @@ const Home = () => {
 
   return (
     <div className="home-container">
+      <RealTimeStatus />
       <section className="welcome-section">
         <div className="welcome-content">
           <p className="welcome-tagline">Synchronise academics across every department in real time.</p>

@@ -35,7 +35,12 @@ const createTimetable = async (req, res) => {
     const timetable = new Timetable(req.body);
     await timetable.save();
     
-    // Real-time update removed for simplicity
+    // Emit real-time update
+    req.app.get('io').emit('timetableCreated', {
+      section: timetable.section,
+      data: timetable,
+      timestamp: new Date()
+    });
     
     res.status(201).json(timetable);
   } catch (error) {
@@ -56,7 +61,12 @@ const updateTimetable = async (req, res) => {
       return res.status(404).json({ message: 'Timetable not found' });
     }
     
-    // Real-time update removed for simplicity
+    // Emit real-time update
+    req.app.get('io').emit('timetableUpdated', {
+      section: timetable.section,
+      data: timetable,
+      timestamp: new Date()
+    });
     
     res.json(timetable);
   } catch (error) {

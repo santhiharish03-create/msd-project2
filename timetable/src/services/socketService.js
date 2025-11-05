@@ -1,64 +1,51 @@
+import { io } from 'socket.io-client';
+
 class SocketService {
   constructor() {
+    this.socket = null;
     this.connected = false;
-    this.listeners = new Map();
-    this.pollInterval = null;
   }
 
   connect() {
-    console.log('Simulating real-time connection...');
-    this.connected = true;
-    
-    // Simulate connection
-    setTimeout(() => {
-      this.emit('connect');
-    }, 100);
-    
-    // Poll for updates every 5 seconds
-    this.pollInterval = setInterval(() => {
-      this.emit('statusUpdate', { timestamp: new Date() });
-    }, 5000);
-    
-    return this;
+    if (!this.socket) {
+      this.socket = io(process.env.REACT_APP_API_URL?.replace('/api', '') || 'http://localhost:5001');
+      
+      this.socket.on('connect', () => {
+        console.log('Connected to real-time server');
+        this.connected = true;
+      });
+
+      this.socket.on('disconnect', () => {
+        console.log('Disconnected from real-time server');
+        this.connected = false;
+      });
+    }
+    return this.socket;
   }
 
   on(event, callback) {
-    if (!this.listeners.has(event)) {
-      this.listeners.set(event, []);
-    }
-    this.listeners.get(event).push(callback);
+    if (!this.socket) this.connect();
+    this.socket.on(event, callback);
   }
 
   off(event, callback) {
-    if (this.listeners.has(event)) {
-      const callbacks = this.listeners.get(event);
-      const index = callbacks.indexOf(callback);
-      if (index > -1) {
-        callbacks.splice(index, 1);
-      }
+    if (this.socket) {
+      this.socket.off(event, callback);
     }
   }
 
   emit(event, data) {
-    if (this.listeners.has(event)) {
-      this.listeners.get(event).forEach(callback => {
-        try {
-          callback(data);
-        } catch (error) {
-          console.error('Socket callback error:', error);
-        }
-      });
+    if (this.socket) {
+      this.socket.emit(event, data);
     }
   }
 
   disconnect() {
-    this.connected = false;
-    if (this.pollInterval) {
-      clearInterval(this.pollInterval);
-      this.pollInterval = null;
+    if (this.socket) {
+      this.socket.disconnect();
+      this.socket = null;
+      this.connected = false;
     }
-    this.emit('disconnect');
-    this.listeners.clear();
   }
 }
 

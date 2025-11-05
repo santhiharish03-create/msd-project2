@@ -109,7 +109,12 @@ router.post('/excel', (req, res, next) => {
       savedTimetables.push(timetable);
     }
 
-    // Real-time update removed for simplicity
+    // Emit real-time update
+    req.app.get('io').emit('timetableUploaded', {
+      count: savedTimetables.length,
+      sections: savedTimetables.map(t => t.section),
+      timestamp: new Date()
+    });
 
     res.json({
       message: 'Excel file processed successfully',
