@@ -50,7 +50,7 @@ const Login = () => {
             <FaEnvelope className="input-icon" />
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Your Email"
               value={credentials.email}
               onChange={(e) => setCredentials({...credentials, email: e.target.value})}
               required
