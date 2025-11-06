@@ -8,7 +8,7 @@ import './Login.css';
 
 const Login = () => {
   // All hooks must be called before any conditional returns
-  const [credentials, setCredentials] = useState({ username: '', password: '' });
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
@@ -17,7 +17,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!credentials.username || !credentials.password) {
+    if (!credentials.email || !credentials.password) {
       toast.error('Please fill in all fields');
       return;
     }
@@ -49,10 +49,10 @@ const Login = () => {
           <div className="input-group">
             <FaUser className="input-icon" />
             <input
-              type="text"
-              placeholder="Username"
-              value={credentials.username}
-              onChange={(e) => setCredentials({...credentials, username: e.target.value})}
+              type="email"
+              placeholder="Email"
+              value={credentials.email}
+              onChange={(e) => setCredentials({...credentials, email: e.target.value})}
               required
             />
           </div>
@@ -81,9 +81,9 @@ const Login = () => {
           
           <div className="login-info">
             <p>Demo Credentials:</p>
-            <p><strong>Admin:</strong> admin / admin123</p>
-            <p><strong>Student:</strong> student1 / password123</p>
-            <p><strong>Faculty:</strong> faculty1 / password123</p>
+            <p><strong>Admin:</strong> admin@vignan.edu / admin123</p>
+            <p><strong>Student:</strong> student1@vignan.edu / password123</p>
+            <p><strong>Faculty:</strong> faculty1@vignan.edu / password123</p>
           </div>
           
           <div className="switch-form">

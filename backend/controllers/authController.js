@@ -51,14 +51,14 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    if (!username || !password) {
-      return res.status(400).json({ message: 'Please provide username and password' });
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Please provide email and password' });
     }
 
     // Check for admin credentials
-    if (username === 'admin' && password === 'admin123') {
+    if (email === 'admin@vignan.edu' && password === 'admin123') {
       const token = generateToken('admin');
       return res.json({
         message: 'Login successful',
@@ -72,9 +72,7 @@ const login = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({
-      $or: [{ username }, { email: username }]
-    });
+    const user = await User.findOne({ email });
 
     if (!user || !await user.comparePassword(password)) {
       return res.status(401).json({ message: 'Invalid credentials' });
