@@ -1,0 +1,145 @@
+.calendar-container {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+  margin-bottom: 20px;
+}
+
+.calendar-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.upcoming-events {
+  margin-bottom: 30px;
+}
+
+.upcoming-events h4 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+  color: var(--text-color);
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.event-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  border-radius: 4px;
+  background: var(--background-color);
+}
+
+.event-item.holiday {
+  border-left: 4px solid var(--warning-color);
+}
+
+.event-item.event {
+  border-left: 4px solid var(--success-color);
+}
+
+.event-date {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.event-title {
+  font-weight: 500;
+}
+
+.event-type {
+  text-transform: capitalize;
+  font-size: 0.8rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--primary-color);
+  color: white;
+}
+
+.add-event-form {
+  background: var(--background-color);
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.add-event-form h4 {
+  margin-bottom: 15px;
+  color: var(--text-color);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.add-event-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-event-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Dark Mode */
+.dark-mode .calendar-container {
+  background: var(--primary-dark);
+  color: white;
+}
+
+.dark-mode .calendar-header h3,
+.dark-mode .upcoming-events h4,
+.dark-mode .add-event-form h4 {
+  color: white;
+}
+
+.dark-mode .event-item {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .event-date {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark-mode .add-event-form {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group select {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}

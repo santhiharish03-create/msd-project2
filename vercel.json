@@ -1,7 +1,4 @@
 {
-  "buildCommand": "cd timetable && npm run build",
-  "outputDirectory": "timetable/build",
-  "installCommand": "cd timetable && npm install",
   "rewrites": [
     {
       "source": "/(.*)",

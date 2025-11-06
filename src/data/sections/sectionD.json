@@ -1,0 +1,162 @@
+{
+  "section": "D",
+  "roomNumber": "2C-303",
+  "faculty": {
+    "COA": "Dr. M. Ravi",
+    "CCPS": "Mr. K. Suresh",
+    "DAA": "Mr. H. Karan",
+    "OS": "Ms. A. Snehal",
+    "TOC": "Ms. T. Priya",
+    "FP": "Dr. P. Sandeep",
+    "FAD": "Ms. M. Sneha",
+    "NPTEL": "Mr. R. Karthik"
+  },
+  "schedule": {
+    "Monday": {
+      "08:15-09:10": {
+        "subject": "TOC",
+        "faculty": "Ms. T. Priya"
+      },
+      "09:10-10:05": {
+        "subject": "NPTEL",
+        "faculty": "Mr. R. Karthik"
+      },
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "PC LAB",
+        "faculty": "Mr. K. Suresh, Ms. A. Snehal"
+      },
+      "11:15-12:10": {
+        "subject": "COA",
+        "faculty": "Dr. M. Ravi"
+      },
+      "12:10-01:05": "BREAK",
+      "02:00-02:55": {
+        "subject": "DAA",
+        "faculty": "Mr. H. Karan"
+      },
+      "02:55-03:50": {
+        "subject": "NPTEL",
+        "faculty": "Mr. R. Karthik"
+      }
+    },
+    "Tuesday": {
+      "08:15-09:10": {
+        "subject": "COA(T)",
+        "faculty": "Dr. M. Ravi"
+      },
+      "09:10-10:05": {
+        "subject": "COA(TUTORIAL)",
+        "faculty": "Dr. M. Ravi"
+      },
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "OS-P",
+        "faculty": "Ms. A. Snehal"
+      },
+      "11:15-12:10": {
+        "subject": "DAA(T)",
+        "faculty": "Mr. H. Karan"
+      },
+      "12:10-01:05": "BREAK",
+      "02:00-02:55": {
+        "subject": "FP",
+        "faculty": "Dr. P. Sandeep"
+      },
+      "02:55-03:50": {
+        "subject": "DAA-P",
+        "faculty": "Mr. H. Karan"
+      }
+    },
+    "Wednesday": {
+      "08:15-09:10": {
+        "subject": "FAD",
+        "faculty": "Ms. M. Sneha"
+      },
+      "09:10-10:05": "BREAK",
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "COA(T)",
+        "faculty": "Dr. M. Ravi"
+      },
+      "11:15-12:10": {
+        "subject": "TOC",
+        "faculty": "Ms. T. Priya"
+      },
+      "12:10-01:05": {
+        "subject": "DAA(T)",
+        "faculty": "Mr. H. Karan"
+      },
+      "02:00-02:55": {
+        "subject": "OS",
+        "faculty": "Ms. A. Snehal"
+      },
+      "02:55-03:50": {
+        "subject": "CCPS",
+        "faculty": "Mr. K. Suresh"
+      }
+    },
+    "Thursday": {
+      "08:15-09:10": {
+        "subject": "OS",
+        "faculty": "Ms. A. Snehal"
+      },
+      "09:10-10:05": {
+        "subject": "TOC",
+        "faculty": "Ms. T. Priya"
+      },
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "TOC",
+        "faculty": "Ms. T. Priya"
+      },
+      "11:15-12:10": {
+        "subject": "CCPS",
+        "faculty": "Mr. K. Suresh"
+      },
+      "12:10-01:05": "BREAK",
+      "02:00-02:55": {
+        "subject": "DAA",
+        "faculty": "Mr. H. Karan"
+      },
+      "02:55-03:50": {
+        "subject": "FP",
+        "faculty": "Dr. P. Sandeep"
+      }
+    },
+    "Friday": {
+      "08:15-09:10": {
+        "subject": "DAA",
+        "faculty": "Mr. H. Karan"
+      },
+      "09:10-10:05": {
+        "subject": "TOC",
+        "faculty": "Ms. T. Priya"
+      },
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "OS",
+        "faculty": "Ms. A. Snehal"
+      },
+      "11:15-12:10": {
+        "subject": "CCPS",
+        "faculty": "Mr. K. Suresh"
+      },
+      "12:10-01:05": "BREAK",
+      "02:00-02:55": {
+        "subject": "OS(T)",
+        "faculty": "Ms. A. Snehal"
+      },
+      "02:55-03:50": {
+        "subject": "FAD",
+        "faculty": "Ms. M. Sneha"
+      }
+    },
+    "Saturday": {
+      "08:15-09:10": {
+        "subject": "T5 ASSESSMENT",
+        "faculty": "All Faculty"
+      }
+    }
+  }
+}

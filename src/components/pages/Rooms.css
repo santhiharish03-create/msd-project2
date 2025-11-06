@@ -1,0 +1,282 @@
+.rooms-page {
+  padding: 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.rooms-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  background: var(--background-color);
+  z-index: 10;
+  padding: 10px 0;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 15px;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.book-room-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.book-room-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.room-card {
+  background: white;
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.room-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8em;
+  text-transform: capitalize;
+}
+
+.status-badge.available {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.status-badge.occupied {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+.status-badge.maintenance {
+  background-color: var(--warning-color);
+  color: white;
+}
+
+.room-info {
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.room-type {
+  color: var(--text-muted);
+  margin: 5px 0;
+}
+
+.capacity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-color);
+}
+
+.current-class,
+.next-class {
+  background: var(--background-color);
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
+.current-class h4,
+.next-class h4 {
+  margin: 0 0 10px 0;
+  color: var(--primary-color);
+}
+
+.current-class p,
+.next-class p {
+  margin: 5px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.maintenance-info {
+  background: var(--warning-light);
+  color: var(--warning-dark);
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 15px;
+}
+
+.booking-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.booking-content {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+}
+
+.booking-content h3 {
+  margin: 0 0 20px 0;
+  color: var(--primary-color);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.submit-btn,
+.cancel-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.cancel-btn {
+  background-color: var(--danger-color);
+  color: white;
+}
+
+/* Dark Mode */
+.dark-mode .room-card {
+  background: var(--primary-dark);
+  color: white;
+}
+
+.dark-mode .room-header h3 {
+  color: white;
+}
+
+.dark-mode .room-info {
+  border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .room-type {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark-mode .current-class,
+.dark-mode .next-class {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .current-class h4,
+.dark-mode .next-class h4 {
+  color: white;
+}
+
+.dark-mode .booking-content {
+  background: var(--primary-dark);
+  color: white;
+}
+
+.dark-mode .form-group input,
+.dark-mode .form-group select {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .filter-select {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.no-rooms-message {
+  color: var(--danger-color);
+  font-size: 0.8em;
+  margin-top: 4px;
+  display: block;
+}
+
+.dark-mode .no-rooms-message {
+  color: #ff6b7a;
+}

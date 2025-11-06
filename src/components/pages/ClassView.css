@@ -1,0 +1,458 @@
+.class-view {
+  padding: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Header Styles */
+.class-header {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.section-selection select {
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: white;
+  color: var(--text-color);
+  font-size: 1rem;
+}
+
+.section-selection label {
+  font-weight: 600;
+}
+
+.section-info h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+.section-meta {
+  margin-top: 12px;
+  display: flex;
+  gap: 24px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: var(--primary-color);
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.action-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+/* Content Layout */
+.class-content {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 24px;
+}
+
+/* Current Status Cards */
+.current-status {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.status-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.status-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px 0;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+.status-card h4 {
+  margin: 0 0 12px 0;
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.status-card p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  color: var(--text-muted);
+}
+
+/* Attendance Circle */
+.attendance-overall {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.attendance-circle {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.attendance-circle svg {
+  transform: rotate(-90deg);
+}
+
+.attendance-circle .percentage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.subject-attendance {
+  display: grid;
+  grid-template-columns: 1fr 100px 40px;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.progress-bar {
+  height: 6px;
+  background: #eee;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  background: var(--primary-color);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/* Schedule Section */
+.schedule-section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.schedule-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.view-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.view-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--primary-color);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-btn.active,
+.view-btn:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.schedule-content {
+  display: grid;
+  gap: 24px;
+}
+
+.no-schedule {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.schedule-day h4 {
+  margin: 0 0 16px 0;
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.day-classes {
+  display: grid;
+  gap: 12px;
+}
+
+.class-item {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--background-color);
+}
+
+.class-item.theory {
+  border-left: 4px solid var(--primary-color);
+}
+
+.class-item.lab {
+  border-left: 4px solid var(--warning-color);
+}
+
+.class-time {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.class-details h5 {
+  margin: 0 0 8px 0;
+  color: var(--text-color);
+}
+
+.class-details p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Announcements Section */
+.announcements-section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.announcements-section h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 20px 0;
+  color: var(--primary-color);
+}
+
+.announcements-list {
+  display: grid;
+  gap: 16px;
+}
+
+.announcement-card {
+  padding: 16px;
+  border-radius: 8px;
+  background: var(--background-color);
+}
+
+.announcement-card.priority-high {
+  border-left: 4px solid var(--danger-color);
+}
+
+.announcement-card.priority-medium {
+  border-left: 4px solid var(--warning-color);
+}
+
+.announcement-card.priority-low {
+  border-left: 4px solid var(--success-color);
+}
+
+.announcement-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.announcement-header h4 {
+  margin: 0;
+  color: var(--text-color);
+}
+
+.announcement-header .date {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.announcement-card p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* Dark Mode Styles */
+.dark-mode .class-header,
+.dark-mode .status-card,
+.dark-mode .schedule-section,
+.dark-mode .announcements-section {
+  background: var(--primary-dark);
+  color: white;
+}
+
+.dark-mode .section-info h2,
+.dark-mode .status-card h3,
+.dark-mode .schedule-header h3,
+.dark-mode .announcements-section h3 {
+  color: white;
+}
+
+.dark-mode .section-meta,
+.dark-mode .status-card p,
+.dark-mode .announcement-card p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark-mode .class-item,
+.dark-mode .announcement-card {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .progress-bar {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.empty-state {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+
+.empty-state h2 {
+  margin-bottom: 12px;
+  color: var(--primary-color);
+}
+
+.empty-state p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .class-content {
+    grid-template-columns: 1fr;
+  }
+
+  .current-status {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .class-header {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .section-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .class-item {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .class-view {
+    padding: 0;
+  }
+
+  .actions,
+  .view-controls {
+    display: none;
+  }
+
+  .class-content {
+    grid-template-columns: 1fr;
+  }
+
+  .status-card,
+  .schedule-section,
+  .announcements-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none;
+  }
+}

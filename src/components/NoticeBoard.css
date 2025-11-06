@@ -1,0 +1,103 @@
+.notice-board {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notice-input {
+  margin-bottom: 20px;
+}
+
+.notice-input textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  margin-bottom: 10px;
+  resize: vertical;
+  min-height: 100px;
+}
+
+.add-notice-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-notice-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+.notices-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.notice-item {
+  background: var(--background-color);
+  padding: 15px;
+  border-radius: 4px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.notice-text {
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.notice-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.notice-time {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.delete-notice-btn {
+  background: none;
+  border: none;
+  color: var(--danger-color);
+  cursor: pointer;
+  padding: 5px;
+  transition: opacity 0.3s;
+}
+
+.delete-notice-btn:hover {
+  opacity: 0.8;
+}
+
+.no-notices {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 20px;
+}
+
+/* Dark Mode */
+.dark-mode .notice-board {
+  background: var(--primary-dark);
+  color: white;
+}
+
+.dark-mode .notice-item {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .notice-meta {
+  color: rgba(255, 255, 255, 0.7);
+}

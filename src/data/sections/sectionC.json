@@ -1,0 +1,162 @@
+{
+  "section": "C",
+  "roomNumber": "2C-302",
+  "faculty": {
+    "COA": "Dr. P. Kumar",
+    "CCPS": "Ms. P. Deepa",
+    "DAA": "Ms. B. Aditi",
+    "OS": "Mr. P. Arjun",
+    "TOC": "Mr. D. Ankit",
+    "FP": "Dr. P. Sandeep",
+    "FAD": "Mr. S. Rohan",
+    "NPTEL": "Mr. R. Karthik"
+  },
+  "schedule": {
+    "Monday": {
+      "08:15-09:10": {
+        "subject": "OS",
+        "faculty": "Mr. P. Arjun"
+      },
+      "09:10-10:05": {
+        "subject": "NPTEL",
+        "faculty": "Mr. R. Karthik"
+      },
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "PC LAB",
+        "faculty": "Ms. P. Deepa, Mr. P. Arjun"
+      },
+      "11:15-12:10": {
+        "subject": "COA",
+        "faculty": "Dr. P. Kumar"
+      },
+      "12:10-01:05": "BREAK",
+      "02:00-02:55": {
+        "subject": "DAA",
+        "faculty": "Ms. B. Aditi"
+      },
+      "02:55-03:50": {
+        "subject": "NPTEL",
+        "faculty": "Mr. R. Karthik"
+      }
+    },
+    "Tuesday": {
+      "08:15-09:10": {
+        "subject": "COA(T)",
+        "faculty": "Dr. P. Kumar"
+      },
+      "09:10-10:05": {
+        "subject": "COA(TUTORIAL)",
+        "faculty": "Dr. P. Kumar"
+      },
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "OS-P",
+        "faculty": "Mr. P. Arjun"
+      },
+      "11:15-12:10": {
+        "subject": "DAA(T)",
+        "faculty": "Ms. B. Aditi"
+      },
+      "12:10-01:05": "BREAK",
+      "02:00-02:55": {
+        "subject": "FP",
+        "faculty": "Dr. P. Sandeep"
+      },
+      "02:55-03:50": {
+        "subject": "DAA-P",
+        "faculty": "Ms. B. Aditi"
+      }
+    },
+    "Wednesday": {
+      "08:15-09:10": {
+        "subject": "FAD",
+        "faculty": "Mr. S. Rohan"
+      },
+      "09:10-10:05": "BREAK",
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "COA(T)",
+        "faculty": "Dr. P. Kumar"
+      },
+      "11:15-12:10": {
+        "subject": "TOC",
+        "faculty": "Mr. D. Ankit"
+      },
+      "12:10-01:05": {
+        "subject": "DAA(T)",
+        "faculty": "Ms. B. Aditi"
+      },
+      "02:00-02:55": {
+        "subject": "OS",
+        "faculty": "Mr. P. Arjun"
+      },
+      "02:55-03:50": {
+        "subject": "CCPS",
+        "faculty": "Ms. P. Deepa"
+      }
+    },
+    "Thursday": {
+      "08:15-09:10": {
+        "subject": "OS",
+        "faculty": "Mr. P. Arjun"
+      },
+      "09:10-10:05": {
+        "subject": "TOC",
+        "faculty": "Mr. D. Ankit"
+      },
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "TOC",
+        "faculty": "Mr. D. Ankit"
+      },
+      "11:15-12:10": {
+        "subject": "CCPS",
+        "faculty": "Ms. P. Deepa"
+      },
+      "12:10-01:05": "BREAK",
+      "02:00-02:55": {
+        "subject": "DAA",
+        "faculty": "Ms. B. Aditi"
+      },
+      "02:55-03:50": {
+        "subject": "FP",
+        "faculty": "Dr. P. Sandeep"
+      }
+    },
+    "Friday": {
+      "08:15-09:10": {
+        "subject": "DAA",
+        "faculty": "Ms. B. Aditi"
+      },
+      "09:10-10:05": {
+        "subject": "TOC",
+        "faculty": "Mr. D. Ankit"
+      },
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "OS",
+        "faculty": "Mr. P. Arjun"
+      },
+      "11:15-12:10": {
+        "subject": "CCPS",
+        "faculty": "Ms. P. Deepa"
+      },
+      "12:10-01:05": "BREAK",
+      "02:00-02:55": {
+        "subject": "OS(T)",
+        "faculty": "Mr. P. Arjun"
+      },
+      "02:55-03:50": {
+        "subject": "FAD",
+        "faculty": "Mr. S. Rohan"
+      }
+    },
+    "Saturday": {
+      "08:15-09:10": {
+        "subject": "T5 ASSESSMENT",
+        "faculty": "All Faculty"
+      }
+    }
+  }
+}

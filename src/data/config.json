@@ -1,0 +1,33 @@
+{
+  "faculty": {
+    "COA": "Dr. S. Ramesh (9876543210)",
+    "COA_TUTORIAL": "Dr. S. Ramesh (9876543210)",
+    "CCPS": "Mr. T. Anirudh, Ms. P. Deepa, Mr. K. Suresh",
+    "DAA": "Dr. N. Kishore (9123456789), Ms. B. Aditi, Mr. H. Karan, Ms. T. Megha",
+    "DAA_TRANSACTION_PRACTICE": "Dr. N. Kishore (9123456789)",
+    "FAD": "Ms. R. Pooja (8765432109), Mr. S. Rohan, Ms. M. Sneha, Mr. V. Akash",
+    "OS": "Dr. K. Kumar, Mr. P. Arjun, Ms. A. Snehal, Ms. R. Swathi",
+    "TOC": "Mrs. G. Lavanya, Mr. D. Ankit, Ms. T. Priya, Mr. S. Rahul",
+    "CC": "Mr. Nitin",
+    "FP": "Dr. P. Sandeep",
+    "NPTEL": "Mr. R. Karthik (9098765432)"
+  },
+  "timeSlots": [
+    "08:15-09:10",
+    "09:10-10:05",
+    "10:05-10:20",
+    "10:20-11:15",
+    "11:15-12:10",
+    "12:10-01:05",
+    "02:00-02:55",
+    "02:55-03:50"
+  ],
+  "days": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ]
+}

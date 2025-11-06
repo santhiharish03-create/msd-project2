@@ -1,0 +1,173 @@
+import React, { useState, useRef } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
+import { FaHome, FaCalendarAlt, FaUserTie, FaDoorOpen, FaGraduationCap, FaUpload, FaCogs, FaSun, FaMoon, FaSignOutAlt } from 'react-icons/fa';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { Toaster } from 'react-hot-toast';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
+import realTimeEngine from './services/realTimeEngine';
+import Landing from './components/pages/Landing';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Home from './components/pages/Home';
+import TimeTable from './components/TimeTable';
+import Faculty from './components/pages/Faculty';
+import Rooms from './components/pages/Rooms';
+import ClassView from './components/pages/ClassView';
+import UploadExcel from './components/UploadExcel';
+import TimetableGenerator from './components/TimetableGenerator';
+import Footer from './components/Footer';
+import vignanLogo from './assets/vignan-logo.png';
+import './App.css';
+
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  const nodeRef = useRef(null);
+
+  return (
+    <TransitionGroup component={null}>
+      <CSSTransition
+        key={location.key}
+        nodeRef={nodeRef}
+        timeout={300}
+        classNames="page"
+        unmountOnExit
+      >
+        <div ref={nodeRef}>
+          <Routes location={location}>
+            <Route path="/home" element={<Home />} />
+            <Route path="/timetable" element={<TimeTable />} />
+            <Route path="/class" element={<ClassView />} />
+            <Route path="/faculty" element={<Faculty />} />
+            <Route path="/rooms" element={<Rooms />} />
+            <Route path="/upload" element={<UploadExcel />} />
+            <Route path="/generate" element={<TimetableGenerator />} />
+          </Routes>
+        </div>
+      </CSSTransition>
+    </TransitionGroup>
+  );
+};
+
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated, loading } = useAuth();
+  
+  if (loading) {
+    return <div className="loading-screen">Loading...</div>;
+  }
+  
+  return isAuthenticated() ? children : <Navigate to="/login" />;
+};
+
+const AuthenticatedApp = () => {
+  const [darkMode, setDarkMode] = useState(false);
+  const { user, logout } = useAuth();
+
+  React.useEffect(() => {
+    // Start real-time engine when app loads
+    realTimeEngine.start();
+    
+    return () => {
+      realTimeEngine.stop();
+    };
+  }, []);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle('dark-mode');
+  };
+
+  return (
+    <div className={`app ${darkMode ? 'dark-mode' : ''}`}>
+      <nav className="navbar">
+        <div className="nav-brand">
+          <img src={vignanLogo} alt="Vignan Logo" className="nav-logo" />
+          <h1>Vignan University</h1>
+        </div>
+        
+        <div className="nav-links">
+          <Link to="/home" className="nav-link">
+            <FaHome /> Home
+          </Link>
+          <Link to="/timetable" className="nav-link">
+            <FaCalendarAlt /> Timetable
+          </Link>
+          <Link to="/class" className="nav-link">
+            <FaGraduationCap /> Class View
+          </Link>
+          <Link to="/faculty" className="nav-link">
+            <FaUserTie /> Faculty
+          </Link>
+          <Link to="/rooms" className="nav-link">
+            <FaDoorOpen /> Rooms
+          </Link>
+          {user && user.role === 'admin' && (
+            <Link to="/upload" className="nav-link">
+              <FaUpload /> Upload
+            </Link>
+          )}
+          <Link to="/generate" className="nav-link">
+            <FaCogs /> Generate
+          </Link>
+          {user && (
+            <div className="user-info">
+              <span className="user-name">{user.username}</span>
+              <span className="user-role">({user.role})</span>
+            </div>
+          )}
+          <button 
+            className="dark-mode-toggle" 
+            onClick={toggleDarkMode}
+            aria-label="Toggle dark mode"
+          >
+            {darkMode ? <FaSun /> : <FaMoon />}
+          </button>
+          <button 
+            className="logout-btn" 
+            onClick={logout}
+            aria-label="Logout"
+          >
+            <FaSignOutAlt /> Logout
+          </button>
+        </div>
+      </nav>
+
+      <main className="main-content">
+        <AnimatedRoutes />
+      </main>
+
+      <Footer />
+
+      <Toaster 
+        position="bottom-right"
+        toastOptions={{
+          className: darkMode ? 'dark-toast' : '',
+          style: {
+            background: darkMode ? '#333' : '#fff',
+            color: darkMode ? '#fff' : '#333',
+          },
+        }} 
+      />
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/*" element={
+            <ProtectedRoute>
+              <AuthenticatedApp />
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
+};
+
+export default App;

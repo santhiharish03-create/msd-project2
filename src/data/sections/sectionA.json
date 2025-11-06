@@ -1,0 +1,165 @@
+{
+  "section": "A",
+  "roomNumber": "2B-402",
+  "faculty": {
+    "COA": "Dr. S. Ramesh",
+    "CCPS": "Mr. T. Anirudh",
+    "DAA": "Dr. N. Kishore",
+    "OS": "Dr. K. Kumar",
+    "TOC": "Mrs. G. Lavanya",
+    "FP": "Dr. P. Sandeep",
+    "FAD": "Ms. R. Pooja",
+    "NPTEL": "Mr. R. Karthik"
+  },
+  "schedule": {
+    "Monday": {
+      "08:15-09:10": {
+        "subject": "TOC",
+        "faculty": "Mrs. G. Lavanya"
+      },
+      "09:10-10:05": {
+        "subject": "NPTEL",
+        "faculty": "Mr. R. Karthik"
+      },
+      "10:05-10:20": {
+        "subject": "CCPS",
+        "faculty": "Mr. T. Anirudh"
+      },
+      "10:20-11:15": {
+        "subject": "PC LAB",
+        "faculty": "Mr. T. Anirudh, Dr. K. Kumar"
+      },
+      "11:15-12:10": {
+        "subject": "COA",
+        "faculty": "Dr. S. Ramesh"
+      },
+      "12:10-01:05": "BREAK",
+      "02:00-02:55": {
+        "subject": "DAA",
+        "faculty": "Dr. N. Kishore"
+      },
+      "02:55-03:50": {
+        "subject": "NPTEL",
+        "faculty": "Mr. R. Karthik"
+      }
+    },
+    "Tuesday": {
+      "08:15-09:10": {
+        "subject": "COA(T)",
+        "faculty": "Dr. S. Ramesh"
+      },
+      "09:10-10:05": {
+        "subject": "COA(TUTORIAL)",
+        "faculty": "Dr. S. Ramesh"
+      },
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "OS-P",
+        "faculty": "Dr. K. Kumar"
+      },
+      "11:15-12:10": {
+        "subject": "DAA(T)",
+        "faculty": "Dr. N. Kishore"
+      },
+      "12:10-01:05": "BREAK",
+      "02:00-02:55": {
+        "subject": "FP",
+        "faculty": "Dr. P. Sandeep"
+      },
+      "02:55-03:50": {
+        "subject": "DAA-P",
+        "faculty": "Dr. N. Kishore"
+      }
+    },
+    "Wednesday": {
+      "08:15-09:10": {
+        "subject": "FAD",
+        "faculty": "Ms. R. Pooja"
+      },
+      "09:10-10:05": "BREAK",
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "COA(T)",
+        "faculty": "Dr. S. Ramesh"
+      },
+      "11:15-12:10": {
+        "subject": "TOC",
+        "faculty": "Mrs. G. Lavanya"
+      },
+      "12:10-01:05": {
+        "subject": "DAA(T)",
+        "faculty": "Dr. N. Kishore"
+      },
+      "02:00-02:55": {
+        "subject": "OS",
+        "faculty": "Dr. K. Kumar"
+      },
+      "02:55-03:50": {
+        "subject": "CCPS",
+        "faculty": "Mr. T. Anirudh"
+      }
+    },
+    "Thursday": {
+      "08:15-09:10": {
+        "subject": "OS",
+        "faculty": "Dr. K. Kumar"
+      },
+      "09:10-10:05": {
+        "subject": "TOC",
+        "faculty": "Mrs. G. Lavanya"
+      },
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "TOC",
+        "faculty": "Mrs. G. Lavanya"
+      },
+      "11:15-12:10": {
+        "subject": "CCPS",
+        "faculty": "Mr. T. Anirudh"
+      },
+      "12:10-01:05": "BREAK",
+      "02:00-02:55": {
+        "subject": "DAA",
+        "faculty": "Dr. N. Kishore"
+      },
+      "02:55-03:50": {
+        "subject": "FP",
+        "faculty": "Dr. P. Sandeep"
+      }
+    },
+    "Friday": {
+      "08:15-09:10": {
+        "subject": "DAA",
+        "faculty": "Dr. N. Kishore"
+      },
+      "09:10-10:05": {
+        "subject": "TOC",
+        "faculty": "Mrs. G. Lavanya"
+      },
+      "10:05-10:20": "BREAK",
+      "10:20-11:15": {
+        "subject": "OS",
+        "faculty": "Dr. K. Kumar"
+      },
+      "11:15-12:10": {
+        "subject": "CCPS",
+        "faculty": "Mr. T. Anirudh"
+      },
+      "12:10-01:05": "BREAK",
+      "02:00-02:55": {
+        "subject": "OS(T)",
+        "faculty": "Dr. K. Kumar"
+      },
+      "02:55-03:50": {
+        "subject": "FAD",
+        "faculty": "Ms. R. Pooja"
+      }
+    },
+    "Saturday": {
+      "08:15-09:10": {
+        "subject": "T5 ASSESSMENT",
+        "faculty": "All Faculty"
+      }
+    }
+  }
+}
