@@ -36,7 +36,7 @@ const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
     origin: process.env.NODE_ENV === 'production' 
-      ? ["https://msd-project2-cipd.vercel.app"]
+      ? ["https://msd-project2-bn9l.vercel.app"]
       : "http://localhost:3000",
     methods: ["GET", "POST"]
   }
@@ -47,7 +47,7 @@ app.set('io', io);
 
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
-    ? ["https://msd-project2-cipd.vercel.app"]
+    ? ["https://msd-project2-bn9l.vercel.app"]
     : ['http://localhost:3000', 'http://localhost:3001'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
