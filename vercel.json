@@ -1,5 +1,18 @@
 {
-  "buildCommand": "cd timetable && npm run build",
-  "outputDirectory": "timetable/build",
-  "installCommand": "cd timetable && npm install"
+  "version": 2,
+  "builds": [
+    {
+      "src": "timetable/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
 }
