@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaSearch, FaClock, FaBell, FaCalendarAlt, FaChalkboardTeacher, FaDoorOpen, FaBullhorn, FaUniversity, FaUsers, FaCloudDownloadAlt, FaShieldAlt, FaChartLine, FaWifi, FaSpinner } from 'react-icons/fa';
+import { FaSearch, FaClock, FaBell, FaCalendarAlt, FaChalkboardTeacher, FaDoorOpen, FaBullhorn, FaUsers, FaChartLine, FaSpinner } from 'react-icons/fa';
 import realTimeEngine from '../../services/realTimeEngine';
 import { NotificationBusinessLogic } from '../../services/businessLogic';
 import { useAuth } from '../../contexts/AuthContext';
@@ -25,7 +25,7 @@ const Home = () => {
   const [connected, setConnected] = useState(false);
   const [loading, setLoading] = useState(true);
   const [currentTimeSlot, setCurrentTimeSlot] = useState(null);
-  const [academicWeek, setAcademicWeek] = useState(0);
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -77,7 +77,7 @@ const Home = () => {
       realTimeEngine.unsubscribe('announcements', handleAnnouncementUpdate);
       realTimeEngine.unsubscribe('rooms', handleRoomUpdate);
     };
-  }, []);
+  }, [user]);
 
   const getCurrentTimeString = () => {
     return currentTime.toLocaleTimeString('en-US', {

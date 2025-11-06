@@ -247,4 +247,5 @@ class RealTimeEngine {
   }
 }
 
-export default new RealTimeEngine();
+const realTimeEngineInstance = new RealTimeEngine();
+export default realTimeEngineInstance;

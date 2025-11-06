@@ -13,9 +13,7 @@ const AdminDashboard = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [stats, setStats] = useState({ sections: 0, rooms: 0, faculty: 0, occupancyRate: 0 });
   const [liveClasses, setLiveClasses] = useState([]);
-  const [availableRooms, setAvailableRooms] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
-  const [connected, setConnected] = useState(false);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
 
@@ -46,21 +44,14 @@ const AdminDashboard = () => {
       setAnnouncements(prioritized);
     };
     
-    const handleRoomUpdate = (rooms) => {
-      if (!rooms) return;
-      setAvailableRooms(rooms.filter(r => r.status === 'available').slice(0, 3));
-    };
-    
     realTimeEngine.subscribe('dashboard', handleDashboardUpdate);
     realTimeEngine.subscribe('announcements', handleAnnouncementUpdate);
-    realTimeEngine.subscribe('rooms', handleRoomUpdate);
     realTimeEngine.start();
 
     return () => {
       clearInterval(clockTimer);
       realTimeEngine.unsubscribe('dashboard', handleDashboardUpdate);
       realTimeEngine.unsubscribe('announcements', handleAnnouncementUpdate);
-      realTimeEngine.unsubscribe('rooms', handleRoomUpdate);
     };
   }, [user]);
 
