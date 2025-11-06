@@ -1,26 +1,12 @@
 {
-  "version": 2,
-  "builds": [
+  "buildCommand": "cd timetable && npm install && npm run build",
+  "outputDirectory": "timetable/build",
+  "installCommand": "npm install --prefix timetable",
+  "framework": null,
+  "rewrites": [
     {
-      "src": "timetable/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
