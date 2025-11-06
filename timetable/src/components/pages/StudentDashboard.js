@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaClock, FaCalendarAlt, FaBookOpen, FaBell, FaUser, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaClock, FaCalendarAlt, FaBookOpen, FaBell } from 'react-icons/fa';
 import realTimeEngine from '../../services/realTimeEngine';
 import { useAuth } from '../../contexts/AuthContext';
 import InteractiveCard from '../InteractiveCard';
@@ -10,10 +10,7 @@ import './Dashboard.css';
 
 const StudentDashboard = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [myTimetable, setMyTimetable] = useState(null);
-  const [currentClass, setCurrentClass] = useState(null);
-  const [nextClass, setNextClass] = useState(null);
-  const [announcements, setAnnouncements] = useState([]);
+  const [announcements] = useState([]);
   const { user } = useAuth();
 
   useEffect(() => {
@@ -21,19 +18,10 @@ const StudentDashboard = () => {
       setCurrentTime(new Date());
     }, 60000);
 
-    const handleTimetableUpdate = (timetables) => {
-      if (user?.section && timetables) {
-        const mySection = timetables.find(t => t.section === user.section);
-        setMyTimetable(mySection);
-      }
-    };
-
-    realTimeEngine.subscribe('timetables', handleTimetableUpdate);
     realTimeEngine.start();
 
     return () => {
       clearInterval(clockTimer);
-      realTimeEngine.unsubscribe('timetables', handleTimetableUpdate);
     };
   }, [user]);
 
@@ -58,29 +46,7 @@ const StudentDashboard = () => {
         <img src={campusImage} alt="Vignan Logo" className="dashboard-logo" />
       </section>
 
-      {currentClass && (
-        <section className="current-class-section">
-          <h2>Current Class</h2>
-          <div className="class-card current">
-            <h3>{currentClass.subject}</h3>
-            <p><FaUser /> {currentClass.faculty}</p>
-            <p><FaMapMarkerAlt /> {currentClass.room}</p>
-            <p><FaClock /> {currentClass.time}</p>
-          </div>
-        </section>
-      )}
 
-      {nextClass && (
-        <section className="next-class-section">
-          <h2>Next Class</h2>
-          <div className="class-card next">
-            <h3>{nextClass.subject}</h3>
-            <p><FaUser /> {nextClass.faculty}</p>
-            <p><FaMapMarkerAlt /> {nextClass.room}</p>
-            <p><FaClock /> {nextClass.time}</p>
-          </div>
-        </section>
-      )}
 
       <section className="quick-access">
         <h2>Quick Access</h2>
