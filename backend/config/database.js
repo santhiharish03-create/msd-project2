@@ -9,9 +9,13 @@ const connectDB = async () => {
     const conn = await mongoose.connect(mongoUri);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error('Database connection error:', error);
-    console.error('Failed URI was:', mongoUri);
-    process.exit(1);
+    console.error('Database connection error:', error.message);
+    console.error('Failed URI was:', mongoUri.replace(/\/\/[^:]+:[^@]+@/, '//***:***@'));
+    console.error('Please check MongoDB Atlas IP whitelist settings');
+    // Don't exit in production, let server run without DB for now
+    if (process.env.NODE_ENV !== 'production') {
+      process.exit(1);
+    }
   }
 };
 
