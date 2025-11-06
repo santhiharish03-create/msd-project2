@@ -3,7 +3,16 @@ const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
 const path = require('path');
+
+// Load environment variables
 require('dotenv').config({ path: path.join(__dirname, '.env') });
+
+// Debug environment variables
+console.log('Environment check:');
+console.log('NODE_ENV:', process.env.NODE_ENV);
+console.log('PORT:', process.env.PORT);
+console.log('MONGODB_URI exists:', !!process.env.MONGODB_URI);
+console.log('All env keys:', Object.keys(process.env).filter(k => k.includes('MONGO')));
 const connectDB = require('./config/database');
 
 const timetableRoutes = require('./routes/timetableRoutes');
