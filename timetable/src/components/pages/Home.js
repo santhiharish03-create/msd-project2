@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaSearch, FaClock, FaBell, FaCalendarAlt, FaChalkboardTeacher, FaDoorOpen, FaBullhorn, FaUsers, FaChartLine, FaSpinner } from 'react-icons/fa';
+import { FaSearch, FaClock, FaBell, FaCalendarAlt, FaChalkboardTeacher, FaDoorOpen, FaBullhorn, FaUsers, FaChartLine, FaSpinner, FaCloudDownloadAlt, FaShieldAlt, FaWifi } from 'react-icons/fa';
 import realTimeEngine from '../../services/realTimeEngine';
 import { NotificationBusinessLogic } from '../../services/businessLogic';
 import { useAuth } from '../../contexts/AuthContext';

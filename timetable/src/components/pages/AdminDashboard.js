@@ -27,7 +27,7 @@ const AdminDashboard = () => {
       
       setStats(data.stats || { sections: 0, rooms: 0, faculty: 0, occupancyRate: 0 });
       setLiveClasses(data.liveClasses || []);
-      setConnected(realTimeEngine.isRunning);
+      // setConnected(realTimeEngine.isRunning);
       setLoading(false);
     };
     
