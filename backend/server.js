@@ -2,7 +2,8 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const cors = require('cors');
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const connectDB = require('./config/database');
 
 const timetableRoutes = require('./routes/timetableRoutes');
@@ -25,7 +26,9 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: process.env.NODE_ENV === 'production' 
+      ? ["https://msd-project2-cipd.vercel.app"]
+      : "http://localhost:3000",
     methods: ["GET", "POST"]
   }
 });
@@ -34,7 +37,9 @@ const PORT = process.env.PORT || 5001;
 app.set('io', io);
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  origin: process.env.NODE_ENV === 'production'
+    ? ["https://msd-project2-cipd.vercel.app"]
+    : ['http://localhost:3000', 'http://localhost:3001'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
