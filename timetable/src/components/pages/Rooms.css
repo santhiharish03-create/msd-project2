@@ -1,14 +1,21 @@
 .rooms-page {
-  padding: 20px;
+  padding: 15px;
   max-width: 1200px;
   margin: 0 auto;
+  min-height: calc(100vh - 120px);
+  overflow-y: auto;
 }
 
 .rooms-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  background: var(--background-color);
+  z-index: 10;
+  padding: 10px 0;
 }
 
 .filter-controls {
@@ -42,15 +49,19 @@
 
 .rooms-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 8px;
 }
 
 .room-card {
   background: white;
-  border-radius: 8px;
-  padding: 20px;
+  border-radius: 6px;
+  padding: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: fit-content;
 }
 
 .room-header {
@@ -257,4 +268,15 @@
   background: rgba(255, 255, 255, 0.1);
   color: white;
   border-color: rgba(255, 255, 255, 0.2);
+}
+
+.no-rooms-message {
+  color: var(--danger-color);
+  font-size: 0.8em;
+  margin-top: 4px;
+  display: block;
+}
+
+.dark-mode .no-rooms-message {
+  color: #ff6b7a;
 }

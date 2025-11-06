@@ -4,9 +4,15 @@ const Timetable = require('../models/Timetable');
 const getAllFaculty = async (req, res) => {
   try {
     const faculty = await Faculty.find().select('name phone subjects');
+    
+    if (faculty.length === 0) {
+      return res.json({ message: 'No faculty found. Please add faculty members first.', data: [] });
+    }
+    
     res.json(faculty);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error fetching faculty:', error);
+    res.status(500).json({ message: 'Failed to fetch faculty', error: error.message });
   }
 };
 
@@ -16,6 +22,10 @@ const getFacultySchedule = async (req, res) => {
     const scheduleEntries = [];
 
     const timetables = await Timetable.find();
+    
+    if (timetables.length === 0) {
+      return res.json({ message: 'No timetables found', data: [] });
+    }
     
     timetables.forEach(timetable => {
       Object.entries(timetable.schedule).forEach(([day, slots]) => {
@@ -35,9 +45,14 @@ const getFacultySchedule = async (req, res) => {
       });
     });
 
+    if (scheduleEntries.length === 0) {
+      return res.json({ message: `No schedule found for faculty ${name}`, data: [] });
+    }
+
     res.json(scheduleEntries);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error fetching faculty schedule:', error);
+    res.status(500).json({ message: 'Failed to fetch faculty schedule', error: error.message });
   }
 };
 
@@ -51,8 +66,42 @@ const createFaculty = async (req, res) => {
   }
 };
 
+const updateFaculty = async (req, res) => {
+  try {
+    const faculty = await Faculty.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+    
+    if (!faculty) {
+      return res.status(404).json({ message: 'Faculty not found' });
+    }
+    
+    res.json(faculty);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+const deleteFaculty = async (req, res) => {
+  try {
+    const faculty = await Faculty.findByIdAndDelete(req.params.id);
+    
+    if (!faculty) {
+      return res.status(404).json({ message: 'Faculty not found' });
+    }
+    
+    res.json({ message: 'Faculty deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   getAllFaculty,
   getFacultySchedule,
-  createFaculty
+  createFaculty,
+  updateFaculty,
+  deleteFaculty
 };

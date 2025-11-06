@@ -1,0 +1,31 @@
+Section,Day,Time,Subject,Faculty,Room
+CSE-A,Monday,09:00-10:00,Data Structures,Dr. Rajesh Kumar,CS-101
+CSE-A,Monday,10:00-11:00,Computer Networks,Prof. Anita Sharma,CS-102
+CSE-A,Monday,11:15-12:15,Database Management,Dr. Suresh Reddy,CS-103
+CSE-A,Monday,12:15-01:15,Operating Systems,Prof. Meera Patel,CS-104
+CSE-A,Monday,02:15-03:15,Software Engineering,Dr. Vikram Singh,CS-105
+CSE-A,Monday,03:15-04:15,Data Structures Lab,Dr. Rajesh Kumar,CS-Lab1
+CSE-A,Tuesday,09:00-10:00,Computer Networks,Prof. Anita Sharma,CS-102
+CSE-A,Tuesday,10:00-11:00,Database Management,Dr. Suresh Reddy,CS-103
+CSE-A,Tuesday,11:15-12:15,Operating Systems,Prof. Meera Patel,CS-104
+CSE-A,Tuesday,12:15-01:15,Software Engineering,Dr. Vikram Singh,CS-105
+CSE-A,Tuesday,02:15-03:15,Computer Networks Lab,Prof. Anita Sharma,CS-Lab2
+CSE-A,Tuesday,03:15-04:15,Database Lab,Dr. Suresh Reddy,CS-Lab3
+CSE-B,Monday,09:00-10:00,Machine Learning,Dr. Priya Nair,CS-201
+CSE-B,Monday,10:00-11:00,Web Technologies,Prof. Arjun Gupta,CS-202
+CSE-B,Monday,11:15-12:15,Cloud Computing,Dr. Kavitha Rao,CS-203
+CSE-B,Monday,12:15-01:15,Artificial Intelligence,Prof. Ravi Krishnan,CS-204
+CSE-B,Monday,02:15-03:15,Cybersecurity,Dr. Neha Agarwal,CS-205
+CSE-B,Monday,03:15-04:15,ML Lab,Dr. Priya Nair,CS-Lab4
+ECE-A,Monday,09:00-10:00,Digital Electronics,Dr. Sanjay Verma,ECE-101
+ECE-A,Monday,10:00-11:00,Signal Processing,Prof. Deepika Joshi,ECE-102
+ECE-A,Monday,11:15-12:15,Communication Systems,Dr. Ramesh Babu,ECE-103
+ECE-A,Monday,12:15-01:15,Microprocessors,Prof. Sunita Devi,ECE-104
+ECE-A,Monday,02:15-03:15,Control Systems,Dr. Manoj Kumar,ECE-105
+ECE-A,Monday,03:15-04:15,Digital Lab,Dr. Sanjay Verma,ECE-Lab1
+MECH-A,Monday,09:00-10:00,Thermodynamics,Dr. Ashok Reddy,MECH-101
+MECH-A,Monday,10:00-11:00,Fluid Mechanics,Prof. Lakshmi Prasad,MECH-102
+MECH-A,Monday,11:15-12:15,Machine Design,Dr. Venkat Rao,MECH-103
+MECH-A,Monday,12:15-01:15,Manufacturing Processes,Prof. Geetha Kumari,MECH-104
+MECH-A,Monday,02:15-03:15,CAD/CAM,Dr. Sunil Varma,MECH-105
+MECH-A,Monday,03:15-04:15,Manufacturing Lab,Prof. Geetha Kumari,MECH-Lab1

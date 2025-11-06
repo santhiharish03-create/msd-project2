@@ -75,9 +75,48 @@ class ApiService {
     return this.request(`/faculty/${encodeURIComponent(name)}/schedule`);
   }
 
+  async createFaculty(facultyData) {
+    return this.request('/faculty', {
+      method: 'POST',
+      body: JSON.stringify(facultyData)
+    });
+  }
+
+  async updateFaculty(id, facultyData) {
+    return this.request(`/faculty/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(facultyData)
+    });
+  }
+
+  async deleteFaculty(id) {
+    return this.request(`/faculty/${id}`, {
+      method: 'DELETE'
+    });
+  }
+
   // Room endpoints
   async getAllRooms() {
     return this.request('/rooms');
+  }
+
+  async getAvailableRooms(date, startTime, endTime) {
+    const params = new URLSearchParams();
+    if (date) params.append('date', date);
+    if (startTime) params.append('startTime', startTime);
+    if (endTime) params.append('endTime', endTime);
+    return this.request(`/rooms/available?${params}`);
+  }
+
+  async bookRoom(bookingData) {
+    return this.request('/rooms/book', {
+      method: 'POST',
+      body: JSON.stringify(bookingData),
+    });
+  }
+
+  async getAllBookings() {
+    return this.request('/rooms/bookings');
   }
 
   async getRoomSchedule(roomNumber) {
@@ -92,6 +131,50 @@ class ApiService {
     return this.request('/upload/excel', {
       method: 'POST',
       body: formData
+    });
+  }
+
+  // Authentication endpoints
+  async login(credentials) {
+    return this.request('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(credentials),
+    });
+  }
+
+  async register(userData) {
+    return this.request('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify(userData),
+    });
+  }
+
+  async getProfile(token) {
+    return this.request('/auth/profile', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+  }
+
+  // Live data endpoints
+  async getLiveClasses() {
+    return this.request('/timetables/live');
+  }
+
+  // Announcement endpoints
+  async getAnnouncements(section) {
+    const params = section ? `?section=${section}` : '';
+    return this.request(`/announcements${params}`);
+  }
+
+  async createAnnouncement(data, token) {
+    return this.request('/announcements', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
     });
   }
 

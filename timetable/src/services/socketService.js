@@ -1,51 +1,63 @@
-import { io } from 'socket.io-client';
-
+// Simple socket service implementation without socket.io-client dependency
 class SocketService {
   constructor() {
-    this.socket = null;
     this.connected = false;
+    this.listeners = {};
+    this.reconnectInterval = null;
   }
 
   connect() {
-    if (!this.socket) {
-      this.socket = io(process.env.REACT_APP_API_URL?.replace('/api', '') || 'http://localhost:5001');
-      
-      this.socket.on('connect', () => {
-        console.log('Connected to real-time server');
-        this.connected = true;
-      });
+    // Simulate connection
+    setTimeout(() => {
+      this.connected = true;
+      this.emit('connect');
+      console.log('Socket connected (simulated)');
+    }, 1000);
 
-      this.socket.on('disconnect', () => {
-        console.log('Disconnected from real-time server');
-        this.connected = false;
-      });
+    // Simulate periodic updates
+    this.reconnectInterval = setInterval(() => {
+      if (this.connected) {
+        this.emit('timetableUpdated', { timestamp: new Date() });
+      }
+    }, 30000);
+  }
+
+  disconnect() {
+    this.connected = false;
+    if (this.reconnectInterval) {
+      clearInterval(this.reconnectInterval);
     }
-    return this.socket;
+    this.emit('disconnect');
+    console.log('Socket disconnected');
   }
 
   on(event, callback) {
-    if (!this.socket) this.connect();
-    this.socket.on(event, callback);
+    if (!this.listeners[event]) {
+      this.listeners[event] = [];
+    }
+    this.listeners[event].push(callback);
   }
 
   off(event, callback) {
-    if (this.socket) {
-      this.socket.off(event, callback);
+    if (this.listeners[event]) {
+      this.listeners[event] = this.listeners[event].filter(cb => cb !== callback);
     }
   }
 
   emit(event, data) {
-    if (this.socket) {
-      this.socket.emit(event, data);
+    if (this.listeners[event]) {
+      this.listeners[event].forEach(callback => {
+        try {
+          callback(data);
+        } catch (error) {
+          console.error('Socket event error:', error);
+        }
+      });
     }
   }
 
-  disconnect() {
-    if (this.socket) {
-      this.socket.disconnect();
-      this.socket = null;
-      this.connected = false;
-    }
+  isConnected() {
+    return this.connected;
   }
 }
 

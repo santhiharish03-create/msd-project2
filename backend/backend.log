@@ -1,0 +1,127 @@
+
+> vignan-timetable-backend@1.0.0 start
+> node server.js
+
+Server running on port 5001
+MongoDB Connected: localhost
+Database connected successfully
+Excel upload request received
+File received: 6th OCT III Year Time Table.xlsx Size: 62600
+Parsed entries: 0
+Excel upload request received
+File received: 6th OCT III Year Time Table.xlsx Size: 62600
+Parsed entries: 0
+Excel upload request received
+File received: 6th OCT III Year Time Table.xlsx Size: 62600
+Parsed entries: 0
+Excel upload request received
+File received: 6th OCT III Year Time Table.xlsx Size: 62600
+Parsed entries: 0
+Excel upload request received
+File received: 6th OCT III Year Time Table.xlsx Size: 62600
+Parsed entries: 0
+Excel upload request received
+File received: 6th OCT III Year Time Table.xlsx Size: 62600
+Parsed entries: 0
+Excel upload request received
+File received: 6th OCT III Year Time Table.xlsx Size: 62600
+Parsed entries: 0
+Excel upload request received
+File received: 6th OCT III Year Time Table.xlsx Size: 62600
+Parsed entries: 0
+Excel upload request received
+File received: 6th OCT III Year Time Table.xlsx Size: 62600
+Parsed entries: 0
+Excel upload request received
+File received: 6th OCT III Year Time Table.xlsx Size: 62600
+Parsed entries: 0
+Multer error: Error: Only Excel files allowed
+    at fileFilter (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/routes/uploadRoutes.js:18:10)
+    at wrappedFileFilter (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/multer/index.js:44:7)
+    at Multipart.<anonymous> (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/multer/lib/make-middleware.js:109:7)
+    at Multipart.emit (node:events:508:28)
+    at HeaderParser.cb (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:358:14)
+    at HeaderParser.push (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:394:37)
+    at feed (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/streamsearch/lib/sbmh.js:219:14)
+    at SBMH.push (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/streamsearch/lib/sbmh.js:104:16)
+    at Multipart._write (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:567:19) {
+  storageErrors: []
+}
+Multer error: Error: Only Excel files allowed
+    at fileFilter (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/routes/uploadRoutes.js:18:10)
+    at wrappedFileFilter (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/multer/index.js:44:7)
+    at Multipart.<anonymous> (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/multer/lib/make-middleware.js:109:7)
+    at Multipart.emit (node:events:508:28)
+    at HeaderParser.cb (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:358:14)
+    at HeaderParser.push (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:394:37)
+    at feed (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/streamsearch/lib/sbmh.js:219:14)
+    at SBMH.push (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/streamsearch/lib/sbmh.js:104:16)
+    at Multipart._write (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:567:19) {
+  storageErrors: []
+}
+Multer error: Error: Only Excel files allowed
+    at fileFilter (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/routes/uploadRoutes.js:18:10)
+    at wrappedFileFilter (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/multer/index.js:44:7)
+    at Multipart.<anonymous> (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/multer/lib/make-middleware.js:109:7)
+    at Multipart.emit (node:events:508:28)
+    at HeaderParser.cb (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:358:14)
+    at HeaderParser.push (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:394:37)
+    at feed (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/streamsearch/lib/sbmh.js:219:14)
+    at SBMH.push (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/streamsearch/lib/sbmh.js:104:16)
+    at Multipart._write (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:567:19) {
+  storageErrors: []
+}
+Multer error: Error: Only Excel files allowed
+    at fileFilter (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/routes/uploadRoutes.js:18:10)
+    at wrappedFileFilter (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/multer/index.js:44:7)
+    at Multipart.<anonymous> (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/multer/lib/make-middleware.js:109:7)
+    at Multipart.emit (node:events:508:28)
+    at HeaderParser.cb (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:358:14)
+    at HeaderParser.push (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:394:37)
+    at feed (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/streamsearch/lib/sbmh.js:219:14)
+    at SBMH.push (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/streamsearch/lib/sbmh.js:104:16)
+    at Multipart._write (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:567:19) {
+  storageErrors: []
+}
+Multer error: Error: Only Excel files allowed
+    at fileFilter (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/routes/uploadRoutes.js:18:10)
+    at wrappedFileFilter (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/multer/index.js:44:7)
+    at Multipart.<anonymous> (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/multer/lib/make-middleware.js:109:7)
+    at Multipart.emit (node:events:508:28)
+    at HeaderParser.cb (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:358:14)
+    at HeaderParser.push (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:394:37)
+    at feed (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/streamsearch/lib/sbmh.js:219:14)
+    at SBMH.push (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/streamsearch/lib/sbmh.js:104:16)
+    at Multipart._write (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:567:19) {
+  storageErrors: []
+}
+Excel upload request received
+File received: sample-timetable.xlsx Size: 18304
+Parsed entries: 9
+Excel upload request received
+File received: sample-timetable.xlsx Size: 18304
+Parsed entries: 9
+Excel upload request received
+File received: sample-timetable.xlsx Size: 18304
+Parsed entries: 9
+Multer error: Error: Only Excel files allowed
+    at fileFilter (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/routes/uploadRoutes.js:18:10)
+    at wrappedFileFilter (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/multer/index.js:44:7)
+    at Multipart.<anonymous> (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/multer/lib/make-middleware.js:109:7)
+    at Multipart.emit (node:events:508:28)
+    at HeaderParser.cb (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:358:14)
+    at HeaderParser.push (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:162:20)
+    at SBMH.ssCb [as _cb] (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:394:37)
+    at feed (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/streamsearch/lib/sbmh.js:219:14)
+    at SBMH.push (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/streamsearch/lib/sbmh.js:104:16)
+    at Multipart._write (/Users/pokuriganesh/Desktop/Time-Table--cosmos-garden/backend/node_modules/busboy/lib/types/multipart.js:567:19) {
+  storageErrors: []
+}
+Excel upload request received
+File received: sample-timetable.xlsx Size: 18304
+Parsed entries: 9

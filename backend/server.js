@@ -4,17 +4,21 @@ const socketIo = require('socket.io');
 const cors = require('cors');
 require('dotenv').config();
 const connectDB = require('./config/database');
-const seedData = require('./config/seedData');
 
 const timetableRoutes = require('./routes/timetableRoutes');
 const facultyRoutes = require('./routes/facultyRoutes');
 const roomRoutes = require('./routes/roomRoutes');
 const realtimeRoutes = require('./routes/realtimeRoutes');
 const uploadRoutes = require('./routes/uploadRoutes');
+const authRoutes = require('./routes/authRoutes');
+const announcementRoutes = require('./routes/announcementRoutes');
 const errorHandler = require('./middleware/errorHandler');
 
 connectDB().then(() => {
-  seedData();
+  console.log('Database connected successfully');
+}).catch(err => {
+  console.error('Database connection failed:', err);
+  process.exit(1);
 });
 
 const app = express();
@@ -40,9 +44,11 @@ app.use(express.json());
 // Handle preflight requests
 app.options('*', cors());
 
+app.use('/api/auth', authRoutes);
 app.use('/api/timetables', timetableRoutes);
 app.use('/api/faculty', facultyRoutes);
 app.use('/api/rooms', roomRoutes);
+app.use('/api/announcements', announcementRoutes);
 app.use('/api/realtime', realtimeRoutes);
 app.use('/api/upload', uploadRoutes);
 

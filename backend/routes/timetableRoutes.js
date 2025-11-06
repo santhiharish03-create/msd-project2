@@ -5,12 +5,14 @@ const {
   getAllTimetables,
   createTimetable,
   updateTimetable,
-  getCurrentClass
+  getCurrentClass,
+  getLiveClasses
 } = require('../controllers/timetableController');
 
 const router = express.Router();
 
 router.get('/', getAllTimetables);
+router.get('/live', getLiveClasses);
 router.get('/:section', getTimetable);
 router.get('/:section/current', getCurrentClass);
 

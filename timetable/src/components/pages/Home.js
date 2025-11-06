@@ -1,63 +1,81 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaSearch, FaClock, FaBell, FaCalendarAlt, FaChalkboardTeacher, FaDoorOpen, FaBullhorn, FaUniversity, FaUsers, FaCloudDownloadAlt, FaShieldAlt, FaChartLine, FaWifi } from 'react-icons/fa';
-import { getAllTimetables, getAllRooms, getCurrentClass } from '../../services/timetableService';
-import socketService from '../../services/socketService';
+import { FaSearch, FaClock, FaBell, FaCalendarAlt, FaChalkboardTeacher, FaDoorOpen, FaBullhorn, FaUniversity, FaUsers, FaCloudDownloadAlt, FaShieldAlt, FaChartLine, FaWifi, FaSpinner } from 'react-icons/fa';
+import realTimeEngine from '../../services/realTimeEngine';
+import { NotificationBusinessLogic } from '../../services/businessLogic';
+import { useAuth } from '../../contexts/AuthContext';
 import RealTimeStatus from '../RealTimeStatus';
+import InteractiveCard from '../InteractiveCard';
 import campusImage from '../../assets/vignan-logo.png';
 import './Home.css';
 
+import StudentDashboard from './StudentDashboard';
+import AdminDashboard from './AdminDashboard';
+
 const Home = () => {
+  const { user } = useAuth();
+  
+  // All hooks must be called before any conditional returns
   const [showContent, setShowContent] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
-  const [stats, setStats] = useState({ sections: 0, rooms: 0 });
+  const [stats, setStats] = useState({ sections: 0, rooms: 0, faculty: 0, occupancyRate: 0 });
   const [liveClasses, setLiveClasses] = useState([]);
+  const [availableRooms, setAvailableRooms] = useState([]);
+  const [announcements, setAnnouncements] = useState([]);
   const [connected, setConnected] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [currentTimeSlot, setCurrentTimeSlot] = useState(null);
+  const [academicWeek, setAcademicWeek] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);
-    }, 2000);
+    }, 1500);
 
     const clockTimer = setInterval(() => {
       setCurrentTime(new Date());
     }, 60000);
 
-    const loadStats = async () => {
-      try {
-        const [timetables, rooms] = await Promise.all([
-          getAllTimetables(),
-          getAllRooms()
-        ]);
-        setStats({
-          sections: timetables.length || 19,
-          rooms: rooms.length || 120
-        });
-        
-        // Load current classes for sections A, B, C
-        const currentClasses = await Promise.all([
-          getCurrentClass('A'),
-          getCurrentClass('B'),
-          getCurrentClass('C')
-        ]);
-        setLiveClasses(currentClasses.filter(Boolean));
-      } catch (error) {
-        console.error('Error loading stats:', error);
-        setStats({ sections: 19, rooms: 120 });
-      }
+    const handleDashboardUpdate = (data) => {
+      if (!data) return;
+      
+      setStats(data.stats || { sections: 0, rooms: 0, faculty: 0, occupancyRate: 0 });
+      setLiveClasses(data.liveClasses || []);
+      setCurrentTimeSlot(data.currentTimeSlot);
+      setConnected(realTimeEngine.isRunning);
+      setLoading(false);
     };
     
-    // Connect to real-time updates
-    socketService.connect();
-    socketService.on('connect', () => setConnected(true));
-    socketService.on('disconnect', () => setConnected(false));
-    socketService.on('timetableUpdated', () => loadStats());
-
-    loadStats();
+    const handleAnnouncementUpdate = (announcements) => {
+      if (!announcements) return;
+      
+      // Ensure announcements is an array
+      const announcementArray = Array.isArray(announcements) ? announcements : (announcements.data || []);
+      
+      const filtered = announcementArray
+        .filter(notification => NotificationBusinessLogic.shouldShowNotification(notification, user))
+        .slice(0, 3);
+      const prioritized = NotificationBusinessLogic.prioritizeNotifications(filtered);
+      setAnnouncements(prioritized);
+    };
+    
+    const handleRoomUpdate = (rooms) => {
+      if (!rooms) return;
+      setAvailableRooms(rooms.filter(r => r.status === 'available').slice(0, 3));
+    };
+    
+    // Subscribe to real-time updates
+    realTimeEngine.subscribe('dashboard', handleDashboardUpdate);
+    realTimeEngine.subscribe('announcements', handleAnnouncementUpdate);
+    realTimeEngine.subscribe('rooms', handleRoomUpdate);
+    realTimeEngine.start();
 
     return () => {
       clearTimeout(timer);
       clearInterval(clockTimer);
+      realTimeEngine.unsubscribe('dashboard', handleDashboardUpdate);
+      realTimeEngine.unsubscribe('announcements', handleAnnouncementUpdate);
+      realTimeEngine.unsubscribe('rooms', handleRoomUpdate);
     };
   }, []);
 
@@ -68,6 +86,15 @@ const Home = () => {
       hour12: true
     });
   };
+  
+  // Role-based dashboard routing
+  if (user?.role === 'admin') {
+    return <AdminDashboard />;
+  }
+  
+  if (user?.role === 'student' || user?.role === 'faculty') {
+    return <StudentDashboard />;
+  }
 
   if (!showContent) {
     return (
@@ -126,56 +153,64 @@ const Home = () => {
       <section className="quick-access">
         <h2>Quick Access</h2>
         <div className="quick-links">
-          <Link to="/timetable" className="quick-link">
-            <FaCalendarAlt className="quick-link-icon" />
-            <span className="quick-link-title">View Timetable</span>
-            <p className="quick-link-description">Browse daily schedules across all sections and laboratories.</p>
+          <Link to="/timetable" style={{ textDecoration: 'none' }}>
+            <InteractiveCard
+              title="View Timetable"
+              description="Browse daily schedules across all sections and laboratories."
+              icon={FaCalendarAlt}
+            />
           </Link>
-          <Link to="/faculty" className="quick-link">
-            <FaChalkboardTeacher className="quick-link-icon" />
-            <span className="quick-link-title">Faculty Status</span>
-            <p className="quick-link-description">Check teaching assignments and identify free faculty slots.</p>
+          <Link to="/faculty" style={{ textDecoration: 'none' }}>
+            <InteractiveCard
+              title="Faculty Status"
+              description="Check teaching assignments and identify free faculty slots."
+              icon={FaChalkboardTeacher}
+            />
           </Link>
-          <Link to="/rooms" className="quick-link">
-            <FaDoorOpen className="quick-link-icon" />
-            <span className="quick-link-title">Room Availability</span>
-            <p className="quick-link-description">Track occupancy and secure the right classroom for your session.</p>
+          <Link to="/rooms" style={{ textDecoration: 'none' }}>
+            <InteractiveCard
+              title="Room Availability"
+              description="Track occupancy and secure the right classroom for your session."
+              icon={FaDoorOpen}
+            />
           </Link>
-          <Link to="/class" className="quick-link">
-            <FaBullhorn className="quick-link-icon" />
-            <span className="quick-link-title">Class Overview</span>
-            <p className="quick-link-description">Review section-wise plans and download consolidated views.</p>
+          <Link to="/class" style={{ textDecoration: 'none' }}>
+            <InteractiveCard
+              title="Class Overview"
+              description="Review section-wise plans and download consolidated views."
+              icon={FaBullhorn}
+            />
           </Link>
         </div>
       </section>
 
       <section className="metric-strip">
         <div className="metric-item">
-          <FaUniversity className="metric-icon" />
+          <FaCalendarAlt className="metric-icon" />
           <div className="metric-content">
-            <p className="metric-value">52</p>
-            <p className="metric-label">Departments</p>
+            <p className="metric-value">{loading ? <FaSpinner className="spin" /> : stats.sections}</p>
+            <p className="metric-label">Sections</p>
           </div>
         </div>
         <div className="metric-item">
           <FaDoorOpen className="metric-icon" />
           <div className="metric-content">
-            <p className="metric-value">{stats.rooms}</p>
+            <p className="metric-value">{loading ? <FaSpinner className="spin" /> : stats.rooms}</p>
             <p className="metric-label">Classrooms</p>
           </div>
         </div>
         <div className="metric-item">
           <FaUsers className="metric-icon" />
           <div className="metric-content">
-            <p className="metric-value">600+</p>
+            <p className="metric-value">{loading ? <FaSpinner className="spin" /> : stats.faculty}</p>
             <p className="metric-label">Faculty</p>
           </div>
         </div>
         <div className="metric-item">
           <FaChartLine className="metric-icon" />
           <div className="metric-content">
-            <p className="metric-value">Realtime</p>
-            <p className="metric-label">Updates</p>
+            <p className="metric-value">{loading ? <FaSpinner className="spin" /> : `${stats.occupancyRate}%`}</p>
+            <p className="metric-label">Occupancy</p>
           </div>
         </div>
       </section>
@@ -252,6 +287,9 @@ const Home = () => {
             <span className={`ml-2 text-xs ${connected ? 'text-green-500' : 'text-red-500'}`}>
               <FaWifi /> {connected ? 'Live' : 'Offline'}
             </span>
+            {currentTimeSlot && (
+              <small className="current-slot">Current: {currentTimeSlot}</small>
+            )}
           </h3>
           <div className="status-list">
             {liveClasses.length > 0 ? liveClasses.map((cls, index) => (
@@ -271,18 +309,21 @@ const Home = () => {
         <div className="status-card available-rooms">
           <h3><FaSearch /> Available Rooms</h3>
           <div className="status-list">
-            <div className="status-item available">
-              <p>Room 102</p>
-              <small>Available for next 2 hours</small>
-            </div>
-            <div className="status-item available">
-              <p>Lab-1</p>
-              <small>Available all day</small>
-            </div>
-            <div className="status-item available">
-              <p>Innovation Studio</p>
-              <small>Available after 12:30 PM</small>
-            </div>
+            {loading ? (
+              <div className="status-item">
+                <FaSpinner className="spin" /> Loading rooms...
+              </div>
+            ) : availableRooms.length > 0 ? availableRooms.map((room, index) => (
+              <div key={index} className="status-item available">
+                <p>Room {room.roomNumber}</p>
+                <small>Capacity: {room.capacity} seats</small>
+              </div>
+            )) : (
+              <div className="status-item">
+                <p>No available rooms</p>
+                <small>All rooms are occupied</small>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -290,21 +331,32 @@ const Home = () => {
       <section className="announcements">
         <h2>Important Announcements</h2>
         <div className="announcement-list">
-          <div className="announcement">
-            <h4>Mid-Semester Exam Schedule</h4>
-            <p>The mid-semester examinations will begin from April 15th, 2025.</p>
-            <small>Posted 2 hours ago</small>
-          </div>
-          <div className="announcement">
-            <h4>Guest Lecture</h4>
-            <p>Special lecture on AI/ML by industry experts on April 5th, 2025.</p>
-            <small>Posted yesterday</small>
-          </div>
-          <div className="announcement">
-            <h4>Semester Timetable Review</h4>
-            <p>Department heads to submit updates for the July semester by March 28th, 2025.</p>
-            <small>Posted 3 days ago</small>
-          </div>
+          {loading ? (
+            <div className="announcement loading-announcement">
+              <FaSpinner className="spin" /> Loading announcements...
+            </div>
+          ) : announcements.length > 0 ? announcements.map((announcement) => (
+            <div key={announcement._id} className={`announcement priority-${announcement.priority}`}>
+              <div className="announcement-header">
+                <span className="notification-icon">
+                  {NotificationBusinessLogic.getNotificationIcon(announcement.type || 'announcement')}
+                </span>
+                <h4>{announcement.title}</h4>
+              </div>
+              <p>{announcement.content}</p>
+              <div className="announcement-meta">
+                <small>Posted {new Date(announcement.createdAt).toLocaleDateString()}</small>
+                <span className={`priority-badge priority-${announcement.priority}`}>
+                  {announcement.priority.toUpperCase()}
+                </span>
+              </div>
+            </div>
+          )) : (
+            <div className="announcement">
+              <h4>No Announcements</h4>
+              <p>No recent announcements available.</p>
+            </div>
+          )}
         </div>
       </section>
     </div>

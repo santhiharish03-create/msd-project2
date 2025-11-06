@@ -1,31 +1,39 @@
 import React, { useState } from 'react';
 import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { toast } from 'react-hot-toast';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext';
 import vignanLogo from '../assets/vignan-logo.png';
 import './Login.css';
 
-const Login = ({ onLogin, onSwitchToSignup }) => {
+const Login = () => {
+  // All hooks must be called before any conditional returns
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Check admin credentials
-    if (credentials.username === 'admin' && credentials.password === 'admin123') {
-      onLogin(true);
+    if (!credentials.username || !credentials.password) {
+      toast.error('Please fill in all fields');
       return;
     }
+
+    setIsLoading(true);
+
+    const result = await login(credentials);
     
-    // Check user accounts from localStorage
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find(u => u.username === credentials.username && u.password === credentials.password);
-    
-    if (user) {
-      onLogin(true);
+    if (result.success) {
+      toast.success('Login successful!');
+      navigate('/');
     } else {
-      setError('Invalid credentials');
+      toast.error(result.error || 'Login failed');
     }
+    
+    setIsLoading(false);
   };
 
   return (
@@ -67,21 +75,22 @@ const Login = ({ onLogin, onSwitchToSignup }) => {
             </button>
           </div>
           
-          {error && <div className="error-message">{error}</div>}
-          
-          <button type="submit" className="login-btn">Login</button>
+          <button type="submit" className="login-btn" disabled={isLoading}>
+            {isLoading ? 'Logging in...' : 'Login'}
+          </button>
           
           <div className="login-info">
             <p>Demo Credentials:</p>
-            <p>Username: <strong>admin</strong></p>
-            <p>Password: <strong>admin123</strong></p>
+            <p><strong>Admin:</strong> admin / admin123</p>
+            <p><strong>Student:</strong> student1 / password123</p>
+            <p><strong>Faculty:</strong> faculty1 / password123</p>
           </div>
           
           <div className="switch-form">
             <p>Don't have an account? 
-              <button type="button" onClick={onSwitchToSignup} className="link-btn">
+              <Link to="/signup" className="link-btn">
                 Sign up here
-              </button>
+              </Link>
             </p>
           </div>
         </form>

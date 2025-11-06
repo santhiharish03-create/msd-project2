@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { FaSearch, FaDownload, FaPrint, FaWifi } from 'react-icons/fa';
+import { FaSearch, FaDownload, FaPrint, FaWifi, FaSpinner } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
-import { getTimetableData, subscribeToTimetable, getFacultySchedule, getRoomSchedule } from '../services/timetableService';
-import { useApi } from '../hooks/useApi';
-import socketService from '../services/socketService';
+import realTimeEngine from '../services/realTimeEngine';
+import apiService from '../services/apiService';
+import { TimetableBusinessLogic } from '../services/businessLogic';
 import ExcelTimetableExplorer from './ExcelTimetableExplorer';
 import './TimeTable.css';
 
@@ -11,44 +11,28 @@ const TimeTable = () => {
   const [searchType, setSearchType] = useState('section');
   const [searchQuery, setSearchQuery] = useState('');
   const [timetableData, setTimetableData] = useState(null);
+  const [allTimetables, setAllTimetables] = useState([]);
   const [loading, setLoading] = useState(false);
   const [connected, setConnected] = useState(false);
-  const { data: healthCheck } = useApi('/health');
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Simulate real-time connection
-    socketService.connect();
-    
-    socketService.on('connect', () => {
-      setConnected(true);
-    });
-    
-    socketService.on('disconnect', () => {
-      setConnected(false);
-    });
-    
-    // Auto-refresh data every 10 seconds
-    const refreshInterval = setInterval(() => {
+    const handleTimetableUpdate = (timetables) => {
+      setAllTimetables(timetables || []);
+      setConnected(realTimeEngine.isRunning);
+      
+      // Auto-update current search if applicable
       if (searchQuery && searchType === 'section') {
-        handleSearch();
+        const found = (timetables || []).find(t => t.section === searchQuery.toUpperCase());
+        if (found) setTimetableData(found);
       }
-    }, 10000);
+    };
     
-    if (searchQuery && searchType === 'section') {
-      const unsubscribe = subscribeToTimetable(searchQuery.toUpperCase(), (data) => {
-        setTimetableData(data);
-      });
-
-      return () => {
-        unsubscribe();
-        clearInterval(refreshInterval);
-        socketService.disconnect();
-      };
-    }
+    realTimeEngine.subscribe('timetables', handleTimetableUpdate);
+    realTimeEngine.start();
     
     return () => {
-      clearInterval(refreshInterval);
-      socketService.disconnect();
+      realTimeEngine.unsubscribe('timetables', handleTimetableUpdate);
     };
   }, [searchQuery, searchType]);
 
@@ -61,22 +45,58 @@ const TimeTable = () => {
     setLoading(true);
     try {
       let data;
+      
       if (searchType === 'section') {
-        data = await getTimetableData(searchQuery.toUpperCase());
+        // Use cached data first, then API if needed
+        data = allTimetables.find(t => t.section === searchQuery.toUpperCase());
+        if (!data) {
+          data = await apiService.getTimetable(searchQuery.toUpperCase());
+        }
       } else if (searchType === 'faculty') {
-        data = await getFacultySchedule(searchQuery);
+        data = await apiService.getFacultySchedule(searchQuery);
       } else if (searchType === 'room') {
-        data = await getRoomSchedule(searchQuery);
+        data = await apiService.getRoomSchedule(searchQuery);
       }
       
       if (data) {
+        // Apply real-time business logic validation
+        if (searchType === 'section' && data.schedule) {
+          const validSchedule = Object.entries(data.schedule).every(([day, slots]) => {
+            return Object.entries(slots).every(([timeSlot, subject]) => {
+              if (timeSlot.includes('-')) {
+                const [start, end] = timeSlot.split('-');
+                return TimetableBusinessLogic.validateTimeSlot(start, end);
+              }
+              return true;
+            });
+          });
+          
+          if (!validSchedule) {
+            toast.error('Invalid time slots detected in timetable');
+            return;
+          }
+          
+          // Enrich with real-time data
+          const currentSlot = TimetableBusinessLogic.getCurrentTimeSlot();
+          const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+          
+          data.currentClass = currentSlot && data.schedule[currentDay]?.[currentSlot] ? {
+            subject: data.schedule[currentDay][currentSlot],
+            timeSlot: currentSlot,
+            faculty: data.faculty[data.schedule[currentDay][currentSlot]] || 'TBA'
+          } : null;
+        }
+        
         setTimetableData(data);
         toast.success(`Found ${searchType} data for ${searchQuery}`);
       } else {
-        toast.error('No results found');
+        setTimetableData(null);
+        toast.error(`No ${searchType} found with name '${searchQuery}'. Please check the spelling or upload data first.`);
       }
     } catch (error) {
-      toast.error('Error fetching data');
+      setError(error.message);
+      setTimetableData(null);
+      toast.error(`Error searching for ${searchType}: ${error.message}`);
     } finally {
       setLoading(false);
     }

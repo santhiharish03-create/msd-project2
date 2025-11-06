@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaCalendarAlt, FaClock, FaCheck, FaTimes } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
+import apiService from '../services/apiService';
 import './RoomBooking.css';
 
 const RoomBooking = () => {
   const [bookings, setBookings] = useState([]);
+  const [availableRooms, setAvailableRooms] = useState([]);
   const [newBooking, setNewBooking] = useState({
-    room: '',
+    roomNumber: '',
     date: '',
     startTime: '',
     endTime: '',
@@ -14,21 +16,44 @@ const RoomBooking = () => {
     faculty: ''
   });
 
-  const rooms = ['101', '102', '103', 'Lab-1', 'Lab-2', 'Conference Room'];
+  useEffect(() => {
+    loadBookings();
+    loadAvailableRooms();
+  }, []);
 
-  const isRoomAvailable = (room, date, startTime, endTime) => {
-    return !bookings.some(booking => 
-      booking.room === room &&
-      booking.date === date &&
-      ((startTime >= booking.startTime && startTime < booking.endTime) ||
-       (endTime > booking.startTime && endTime <= booking.endTime))
-    );
+  useEffect(() => {
+    if (newBooking.date && newBooking.startTime && newBooking.endTime) {
+      loadAvailableRooms();
+    }
+  }, [newBooking.date, newBooking.startTime, newBooking.endTime]);
+
+  const loadBookings = async () => {
+    try {
+      const data = await apiService.getAllBookings();
+      setBookings(data);
+    } catch (error) {
+      console.error('Error loading bookings:', error);
+    }
   };
 
-  const handleBooking = () => {
-    const { room, date, startTime, endTime, purpose, faculty } = newBooking;
+  const loadAvailableRooms = async () => {
+    try {
+      const data = await apiService.getAvailableRooms(
+        newBooking.date,
+        newBooking.startTime,
+        newBooking.endTime
+      );
+      setAvailableRooms(data);
+    } catch (error) {
+      console.error('Error loading rooms:', error);
+      setAvailableRooms([]);
+    }
+  };
 
-    if (!room || !date || !startTime || !endTime || !purpose || !faculty) {
+  const handleBooking = async () => {
+    const { roomNumber, date, startTime, endTime, purpose, faculty } = newBooking;
+
+    if (!roomNumber || !date || !startTime || !endTime || !purpose || !faculty) {
       toast.error('Please fill in all fields');
       return;
     }
@@ -38,21 +63,22 @@ const RoomBooking = () => {
       return;
     }
 
-    if (!isRoomAvailable(room, date, startTime, endTime)) {
-      toast.error('Room is already booked for this time slot');
-      return;
+    try {
+      await apiService.bookRoom(newBooking);
+      toast.success('Room booked successfully');
+      setNewBooking({
+        roomNumber: '',
+        date: '',
+        startTime: '',
+        endTime: '',
+        purpose: '',
+        faculty: ''
+      });
+      loadBookings();
+      loadAvailableRooms();
+    } catch (error) {
+      toast.error(error.message || 'Failed to book room');
     }
-
-    setBookings([...bookings, { ...newBooking, id: Date.now() }]);
-    setNewBooking({
-      room: '',
-      date: '',
-      startTime: '',
-      endTime: '',
-      purpose: '',
-      faculty: ''
-    });
-    toast.success('Room booked successfully');
   };
 
   return (
@@ -63,14 +89,19 @@ const RoomBooking = () => {
         <div className="form-group">
           <label>Room:</label>
           <select
-            value={newBooking.room}
-            onChange={(e) => setNewBooking({ ...newBooking, room: e.target.value })}
+            value={newBooking.roomNumber}
+            onChange={(e) => setNewBooking({ ...newBooking, roomNumber: e.target.value })}
           >
             <option value="">Select Room</option>
-            {rooms.map(room => (
-              <option key={room} value={room}>{room}</option>
+            {availableRooms.map(room => (
+              <option key={room.roomNumber} value={room.roomNumber}>
+                Room {room.roomNumber} ({room.capacity} seats)
+              </option>
             ))}
           </select>
+          {newBooking.date && newBooking.startTime && newBooking.endTime && availableRooms.length === 0 && (
+            <small className="no-rooms-message">No rooms available for selected time</small>
+          )}
         </div>
 
         <div className="form-group">
@@ -129,15 +160,11 @@ const RoomBooking = () => {
       <div className="bookings-list">
         <h4>Current Bookings</h4>
         {bookings.map(booking => (
-          <div key={booking.id} className="booking-item">
+          <div key={booking._id} className="booking-item">
             <div className="booking-header">
-              <h5>Room {booking.room}</h5>
-              <span className={`status ${isRoomAvailable(booking.room, booking.date, booking.startTime, booking.endTime) ? 'available' : 'booked'}`}>
-                {isRoomAvailable(booking.room, booking.date, booking.startTime, booking.endTime) ? (
-                  <><FaCheck /> Available</>
-                ) : (
-                  <><FaTimes /> Booked</>
-                )}
+              <h5>Room {booking.roomNumber}</h5>
+              <span className="status booked">
+                <FaTimes /> Booked
               </span>
             </div>
             <div className="booking-details">
@@ -148,6 +175,9 @@ const RoomBooking = () => {
             </div>
           </div>
         ))}
+        {bookings.length === 0 && (
+          <p className="no-bookings">No active bookings</p>
+        )}
       </div>
     </div>
   );

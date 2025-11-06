@@ -1,141 +1,320 @@
-.faculty-page {
-  padding: 20px;
+.faculty-container {
+  padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 }
 
 .faculty-header {
-  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.search-bar {
-  margin-top: 15px;
+.faculty-header h1 {
+  color: #333;
+  margin: 0;
 }
 
-.search-bar input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  font-size: 16px;
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-box svg {
+  position: absolute;
+  left: 12px;
+  color: #666;
+  z-index: 1;
+}
+
+.search-box input {
+  padding: 10px 10px 10px 40px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 250px;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.add-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.add-btn:hover {
+  background: #218838;
 }
 
 .faculty-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
 }
 
 .faculty-card {
   background: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 1px solid #e1e5e9;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.faculty-info {
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid var(--border-color);
+.faculty-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
 }
 
-.faculty-name {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 5px;
-}
-
-.faculty-name h3 {
-  margin: 0;
-  color: var(--primary-color);
-}
-
-.department {
-  color: var(--text-muted);
-  margin: 5px 0;
-}
-
-.status {
+.faculty-info h3 {
+  margin: 0 0 0.5rem 0;
+  color: #333;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 10px;
-  padding: 5px 10px;
+}
+
+.faculty-info p {
+  margin: 0.5rem 0;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subjects {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: #666;
+}
+
+.subject-tag {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 4px 8px;
   border-radius: 4px;
-  font-size: 0.9em;
-  width: fit-content;
+  font-size: 12px;
+  font-weight: 500;
 }
 
-.status.teaching {
-  background-color: var(--danger-color);
+.faculty-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 1rem;
+  justify-content: flex-end;
+}
+
+.edit-btn, .delete-btn {
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-btn {
+  background: #ffc107;
   color: white;
 }
 
-.status.available {
-  background-color: var(--success-color);
+.edit-btn:hover {
+  background: #e0a800;
+}
+
+.delete-btn {
+  background: #dc3545;
   color: white;
 }
 
-.current-status {
-  margin-bottom: 20px;
+.delete-btn:hover {
+  background: #c82333;
 }
 
-.current-status p {
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal h2 {
+  margin: 0 0 1.5rem 0;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #e1e5e9;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.subjects-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.subject-item {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 5px 0;
-  color: var(--text-color);
 }
 
-.next-class {
-  background: var(--background-color);
-  padding: 15px;
-  border-radius: 4px;
-}
-
-.next-class h4 {
+.subject-item button {
+  background: none;
+  border: none;
+  color: #1976d2;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  width: 20px;
+  height: 20px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin: 0 0 10px 0;
-  color: var(--primary-color);
+  justify-content: center;
 }
 
-.next-class p {
-  margin: 5px 0;
-  font-size: 0.9em;
+.add-subject-btn {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
-/* Dark Mode */
-.dark-mode .faculty-card {
-  background: var(--primary-dark);
+.add-subject-btn:hover {
+  background: #218838;
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.form-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.form-actions button[type="button"] {
+  background: #6c757d;
   color: white;
 }
 
-.dark-mode .faculty-info {
-  border-bottom-color: rgba(255, 255, 255, 0.2);
-}
-
-.dark-mode .faculty-name h3 {
+.form-actions button[type="submit"] {
+  background: #007bff;
   color: white;
 }
 
-.dark-mode .department {
-  color: rgba(255, 255, 255, 0.7);
+.form-actions button:hover {
+  opacity: 0.9;
 }
 
-.dark-mode .next-class {
-  background: rgba(255, 255, 255, 0.1);
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+  font-size: 1.1rem;
 }
 
-.dark-mode .next-class h4 {
-  color: white;
-}
-
-.dark-mode .search-bar input {
-  background: rgba(255, 255, 255, 0.1);
-  color: white;
-  border-color: rgba(255, 255, 255, 0.2);
+@media (max-width: 768px) {
+  .faculty-container {
+    padding: 1rem;
+  }
+  
+  .faculty-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+  }
+  
+  .search-box input {
+    width: 100%;
+  }
+  
+  .faculty-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .modal {
+    width: 95%;
+    padding: 1.5rem;
+  }
 }

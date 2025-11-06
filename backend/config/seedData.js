@@ -1,6 +1,9 @@
 const Timetable = require('../models/Timetable');
 const Faculty = require('../models/Faculty');
 const Room = require('../models/Room');
+const Booking = require('../models/Booking');
+const User = require('../models/User');
+const Announcement = require('../models/Announcement');
 
 const facultyData = {
   COA: "Dr. S. Ramesh (9876543210)",
@@ -103,7 +106,84 @@ const seedData = async () => {
 
     await Room.insertMany(roomEntries);
 
-    console.log('Database seeded successfully');
+    // Seed sample bookings
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    
+    const sampleBookings = [
+      {
+        roomNumber: roomEntries[0].roomNumber,
+        date: tomorrow.toISOString().split('T')[0],
+        startTime: '14:00',
+        endTime: '15:00',
+        purpose: 'Extra Class - Data Structures',
+        faculty: 'Dr. S. Ramesh'
+      },
+      {
+        roomNumber: roomEntries[1].roomNumber,
+        date: tomorrow.toISOString().split('T')[0],
+        startTime: '15:30',
+        endTime: '16:30',
+        purpose: 'Lab Session - Programming',
+        faculty: 'Ms. R. Pooja'
+      }
+    ];
+
+    await Booking.insertMany(sampleBookings);
+
+    // Seed sample users
+    const sampleUsers = [
+      {
+        username: 'student1',
+        email: 'student1@vignan.edu',
+        password: 'password123',
+        role: 'student'
+      },
+      {
+        username: 'faculty1',
+        email: 'faculty1@vignan.edu',
+        password: 'password123',
+        role: 'faculty'
+      },
+      {
+        username: 'testuser',
+        email: 'test@vignan.edu',
+        password: 'test123',
+        role: 'student'
+      }
+    ];
+
+    await User.insertMany(sampleUsers);
+
+    // Seed sample announcements
+    const sampleAnnouncements = [
+      {
+        title: 'Mid-Semester Exam Schedule',
+        content: 'The mid-semester examinations will begin from April 15th, 2025.',
+        priority: 'high',
+        author: 'Academic Office',
+        targetSections: []
+      },
+      {
+        title: 'Guest Lecture on AI/ML',
+        content: 'Special lecture by industry experts on April 5th, 2025 at 2:00 PM.',
+        priority: 'medium',
+        author: 'CSE Department',
+        targetSections: ['A', 'B', 'C']
+      },
+      {
+        title: 'Lab Equipment Maintenance',
+        content: 'Computer Lab-1 will be under maintenance on April 3rd, 2025.',
+        priority: 'low',
+        author: 'IT Department',
+        targetSections: []
+      }
+    ];
+
+    await Announcement.insertMany(sampleAnnouncements);
+
+    console.log('Database seeded successfully with all sample data');
   } catch (error) {
     console.error('Error seeding database:', error);
   }

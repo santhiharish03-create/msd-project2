@@ -130,3 +130,25 @@
 .dark-mode .booking-details {
   color: rgba(255, 255, 255, 0.7);
 }
+
+.no-rooms-message {
+  color: var(--danger-color);
+  font-size: 0.8em;
+  margin-top: 4px;
+  display: block;
+}
+
+.no-bookings {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 20px;
+}
+
+.dark-mode .no-rooms-message {
+  color: #ff6b7a;
+}
+
+.dark-mode .no-bookings {
+  color: rgba(255, 255, 255, 0.5);
+}
