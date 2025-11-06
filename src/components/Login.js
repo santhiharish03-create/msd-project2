@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaUser, FaLock, FaEye, FaEyeSlash, FaEnvelope } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
@@ -47,7 +47,7 @@ const Login = () => {
         
         <form onSubmit={handleSubmit} className="login-form">
           <div className="input-group">
-            <FaUser className="input-icon" />
+            <FaEnvelope className="input-icon" />
             <input
               type="email"
               placeholder="Email"
