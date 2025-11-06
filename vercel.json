@@ -1,8 +1,7 @@
 {
-  "buildCommand": "cd timetable && npm install && npm run build",
+  "buildCommand": "cd timetable && npm run build",
   "outputDirectory": "timetable/build",
-  "installCommand": "npm install --prefix timetable",
-  "framework": null,
+  "installCommand": "cd timetable && npm install",
   "rewrites": [
     {
       "source": "/(.*)",
